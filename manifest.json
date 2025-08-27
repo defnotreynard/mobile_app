@@ -1,7 +1,7 @@
 {
-  "name": "My Vercel App",
-  "short_name": "VercelApp",
-  "start_url": "/",
+  "name": "PoleWatch - Electricity Pole Monitoring",
+  "short_name": "PoleWatch",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0070f3"
