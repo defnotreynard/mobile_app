@@ -664,5 +664,19 @@
     </div>
 
     <script src="app.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((registration) => {
+              console.log("✅ Service Worker: Registered");
+            })
+            .catch((error) => {
+              console.error("❌ Service Worker: Registration failed", error);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
