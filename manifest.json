@@ -1,7 +1,7 @@
 {
   "name": "My App",
   "short_name": "MyApp",
-  "start_url": "/index.html",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
