@@ -1,538 +1,584 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NORECO Hazard Report</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   <link rel="stylesheet" href="style.css">
-</head>
-<body class="bg-gray-50 font-sans">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-50 font-sans">
     <!-- Mobile App Container -->
-    <div class="max-w-md mx-auto bg-white min-h-screen shadow-lg relative overflow-hidden">
-        <!-- Header -->
-        <header class="bg-blue-600 text-white p-4 shadow-md">
-            <div class="flex justify-between items-center">
-                <h1 class="text-xl font-bold">NORECO Hazard Report</h1>
-                <div class="flex space-x-3">
-                    <button id="notifBtn" class="relative">
-                        <i class="fas fa-bell text-xl"></i>
-                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
-                    </button>
-                    <button id="menuBtn">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </header>
-
-        <!-- Main Content - Dynamic based on navigation -->
-        <main class="p-4 pb-20">
-            <!-- Home Screen (Report Form) -->
-            <div id="homeScreen">
-                <div class="mb-6">
-                    <h2 class="text-lg font-semibold text-gray-800 mb-2">Report Hazardous Electricity Pole</h2>
-                    <p class="text-gray-600 text-sm">Help keep Dumaguete City safe by reporting dangerous electricity poles</p>
-                </div>
-
-                <!-- Photo Capture Section -->
-                <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-medium mb-2">Photo Evidence</label>
-                    <div class="relative border-2 border-dashed border-gray-300 rounded-lg overflow-hidden">
-                        <div id="photoPreview" class="photo-preview bg-gray-100 flex items-center justify-center">
-                            <div class="text-center">
-                                <i class="fas fa-camera text-3xl text-gray-400 mb-2"></i>
-                                <p class="text-gray-500 text-sm">Tap to take or upload photo</p>
-                            </div>
-                        </div>
-                        <input type="file" id="photoInput" accept="image/*" capture="environment" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-                        <div class="camera-icon">
-                            <i class="fas fa-camera"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Description Input -->
-                <div class="mb-6">
-                    <label for="description" class="block text-gray-700 text-sm font-medium mb-2">Description</label>
-                    <textarea id="description" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Describe the issue (e.g. 'leaning pole', 'exposed wire', 'tree hitting wires')"></textarea>
-                </div>
-
-                <!-- Location Section -->
-                <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-medium mb-2">Location</label>
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
-                        <span id="locationText" class="text-gray-600">Getting your location...</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <button id="refreshLocation" class="text-blue-600 text-sm flex items-center">
-                            <i class="fas fa-sync-alt mr-1"></i> Refresh Location
-                        </button>
-                        <button id="manualLocationBtn" class="text-blue-600 text-sm flex items-center">
-                            <i class="fas fa-edit mr-1"></i> Enter Manually
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Manual Location Input (Hidden by default) -->
-                <div id="manualLocationSection" class="mb-6 hidden">
-                    <label for="barangay" class="block text-gray-700 text-sm font-medium mb-2">Barangay</label>
-                    <select id="barangay" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="">Select Barangay</option>
-                        <option value="Bagacay">Bagacay</option>
-                        <option value="Bajumpandan">Bajumpandan</option>
-                        <option value="Balugo">Balugo</option>
-                        <option value="Banilad">Banilad</option>
-                        <option value="Bantayan">Bantayan</option>
-                        <option value="Bantayan">Bantayan</option>
-                        <option value="Barangay 1">Barangay 1</option>
-                        <option value="Barangay 2">Barangay 2</option>
-                        <option value="Barangay 3">Barangay 3</option>
-                        <option value="Barangay 4">Barangay 4</option>
-                        <option value="Barangay 5">Barangay 5</option>
-                        <option value="Barangay 6">Barangay 6</option>
-                        <option value="Barangay 7">Barangay 7</option>
-                        <option value="Barangay 8">Barangay 8</option>
-                        <option value="Batinguel">Batinguel</option>
-                        <option value="Buñao">Buñao</option>
-                        <option value="Cadawinonan">Cadawinonan</option>
-                        <option value="Calindagan">Calindagan</option>
-                        <option value="Camanjac">Camanjac</option>
-                        <option value="Candau-ay">Candau-ay</option>
-                        <option value="Cantil-e">Cantil-e</option>
-                        <option value="Dar">Dar</option>
-                        <option value="Junob">Junob</option>
-                        <option value="Looc">Looc</option>
-                        <option value="Mangnao">Mangnao</option>
-                        <option value="Motong">Motong</option>
-                        <option value="Piapi">Piapi</option>
-                        <option value="Poblacion 1">Poblacion 1</option>
-                        <option value="Poblacion 2">Poblacion 2</option>
-                        <option value="Poblacion 3">Poblacion 3</option>
-                        <option value="Poblacion 4">Poblacion 4</option>
-                        <option value="Poblacion 5">Poblacion 5</option>
-                        <option value="Poblacion 6">Poblacion 6</option>
-                        <option value="Poblacion 7">Poblacion 7</option>
-                        <option value="Poblacion 8">Poblacion 8</option>
-                        <option value="Pulantubig">Pulantubig</option>
-                        <option value="Tabuc-tubig">Tabuc-tubig</option>
-                        <option value="Taclobo">Taclobo</option>
-                        <option value="Talay">Talay</option>
-                    </select>
-
-                    <label for="street" class="block text-gray-700 text-sm font-medium mt-3 mb-2">Street Name</label>
-                    <input type="text" id="street" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter street name">
-                </div>
-
-                <!-- Submit Button -->
-                <button id="submitReport" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md shadow-md transition duration-300 flex items-center justify-center">
-                    <i class="fas fa-paper-plane mr-2"></i> Submit Report
-                </button>
-
-                <!-- Guest User Notice -->
-                <div class="mt-4 text-center text-sm text-gray-500">
-                    <p>By submitting, you agree to our <a href="#" class="text-blue-600">Terms of Service</a>. Reports are anonymous unless you <a href="#" class="text-blue-600">sign in</a>.</p>
-                </div>
-            </div>
-
-            <!-- Reports History Screen (Hidden by default) -->
-            <div id="reportsScreen" class="hidden">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-semibold text-gray-800">Your Reports</h2>
-                    <button id="newReportBtn" class="text-blue-600 text-sm flex items-center">
-                        <i class="fas fa-plus mr-1"></i> New Report
-                    </button>
-                </div>
-
-                <div class="space-y-4">
-                    <!-- Sample Report Item -->
-                    <div class="border border-gray-200 rounded-lg p-4 shadow-sm">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="font-medium text-gray-800">Leaning pole near intersection</h3>
-                                <p class="text-sm text-gray-500">Barangay Bantayan, Rizal Boulevard</p>
-                            </div>
-                            <span class="status-badge status-pending">Pending</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm mt-3">
-                            <span class="text-gray-500">Submitted: 2 hours ago</span>
-                            <button class="text-blue-600" onclick="viewReportDetails(1)">View Details</button>
-                        </div>
-                    </div>
-
-                    <!-- Sample Report Item -->
-                    <div class="border border-gray-200 rounded-lg p-4 shadow-sm">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="font-medium text-gray-800">Exposed wires on pole</h3>
-                                <p class="text-sm text-gray-500">Barangay Looc, Silliman Avenue</p>
-                            </div>
-                            <span class="status-badge status-inprogress">In Progress</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm mt-3">
-                            <span class="text-gray-500">Submitted: 1 day ago</span>
-                            <button class="text-blue-600" onclick="viewReportDetails(2)">View Details</button>
-                        </div>
-                    </div>
-
-                    <!-- Sample Report Item -->
-                    <div class="border border-gray-200 rounded-lg p-4 shadow-sm">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="font-medium text-gray-800">Tree branches touching wires</h3>
-                                <p class="text-sm text-gray-500">Barangay Batinguel, Hibbard Avenue</p>
-                            </div>
-                            <span class="status-badge status-resolved">Resolved</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm mt-3">
-                            <span class="text-gray-500">Submitted: 1 week ago</span>
-                            <button class="text-blue-600" onclick="viewReportDetails(3)">View Details</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Report Details Screen (Hidden by default) -->
-            <div id="reportDetailsScreen" class="hidden">
-                <button id="backToReportsBtn" class="text-blue-600 mb-4 flex items-center">
-                    <i class="fas fa-arrow-left mr-2"></i> Back to Reports
-                </button>
-
-                <div class="bg-gray-100 rounded-lg overflow-hidden mb-4">
-                    <div id="detailPhoto" class="photo-preview" style="background-image: url('https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
-                </div>
-
-                <div class="mb-4">
-                    <h3 id="detailTitle" class="text-lg font-semibold text-gray-800 mb-1">Leaning pole near intersection</h3>
-                    <span id="detailStatus" class="status-badge status-pending inline-block mb-2">Pending</span>
-                    <p id="detailDescription" class="text-gray-700">The electricity pole near the intersection is leaning at about 45 degrees and looks like it might fall over soon, especially during heavy rain.</p>
-                </div>
-
-                <div class="border-t border-b border-gray-200 py-4 mb-4">
-                    <div class="flex items-start mb-3">
-                        <i class="fas fa-map-marker-alt text-gray-400 mt-1 mr-3"></i>
-                        <div>
-                            <h4 class="text-sm font-medium text-gray-500">Location</h4>
-                            <p id="detailLocation" class="text-gray-800">Barangay Bantayan, Rizal Boulevard</p>
-                            <p id="detailCoordinates" class="text-xs text-gray-500">9.3057° N, 123.3064° E</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fas fa-clock text-gray-400 mt-1 mr-3"></i>
-                        <div>
-                            <h4 class="text-sm font-medium text-gray-500">Date & Time</h4>
-                            <p id="detailDateTime" class="text-gray-800">June 15, 2023 at 2:30 PM</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="norecoResponse" class="bg-blue-50 border-l-4 border-blue-500 p-3 rounded-r mb-4 hidden">
-                    <h4 class="text-sm font-medium text-blue-800 mb-1">NORECO Response</h4>
-                    <p id="responseText" class="text-blue-700 text-sm">Our team has inspected the pole and will schedule repairs within 48 hours. Thank you for your report.</p>
-                    <p class="text-blue-600 text-xs mt-1">Updated: June 16, 2023 at 9:15 AM</p>
-                </div>
-
-                <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-md shadow-sm transition duration-300">
-                    <i class="fas fa-share-alt mr-2"></i> Share Report
-                </button>
-            </div>
-        </main>
-
-        <!-- Bottom Navigation -->
-        <nav class="fixed bottom-0 w-full max-w-md bg-white border-t border-gray-200 flex justify-around py-2">
-            <button id="homeNav" class="flex flex-col items-center text-blue-600 p-2">
-                <i class="fas fa-home text-xl"></i>
-                <span class="text-xs mt-1">Home</span>
+    <div
+      class="max-w-md mx-auto bg-white min-h-screen shadow-lg relative overflow-hidden"
+    >
+      <!-- Header -->
+      <header class="bg-blue-600 text-white p-4 shadow-md">
+        <div class="flex justify-between items-center">
+          <h1 class="text-xl font-bold">NORECO Hazard Report</h1>
+          <div class="flex space-x-3">
+            <button id="notifBtn" class="relative">
+              <i class="fas fa-bell text-xl"></i>
+              <span
+                class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
+                >3</span
+              >
             </button>
-            <button id="reportsNav" class="flex flex-col items-center text-gray-500 p-2">
-                <i class="fas fa-list text-xl"></i>
-                <span class="text-xs mt-1">Reports</span>
+            <button id="menuBtn">
+              <i class="fas fa-bars text-xl"></i>
             </button>
-            <button class="flex flex-col items-center text-gray-500 p-2">
-                <i class="fas fa-info-circle text-xl"></i>
-                <span class="text-xs mt-1">Info</span>
-            </button>
-            <button class="flex flex-col items-center text-gray-500 p-2">
-                <i class="fas fa-user text-xl"></i>
-                <span class="text-xs mt-1">Account</span>
-            </button>
-        </nav>
-
-        <!-- Notification Panel (Hidden by default) -->
-        <div id="notificationPanel" class="fixed top-0 right-0 h-full w-72 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-10">
-            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
-                <h3 class="font-medium">Notifications</h3>
-                <button id="closeNotifBtn" class="text-gray-500">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="overflow-y-auto h-full pb-20">
-                <!-- Sample Notification -->
-                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
-                    <div class="flex items-start">
-                        <div class="bg-blue-100 p-2 rounded-full mr-3">
-                            <i class="fas fa-check-circle text-blue-500"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-medium text-sm mb-1">Report Resolved</h4>
-                            <p class="text-gray-600 text-xs">Your report about "Tree branches touching wires" has been resolved by NORECO.</p>
-                            <p class="text-gray-400 text-xs mt-1">2 hours ago</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Sample Notification -->
-                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
-                    <div class="flex items-start">
-                        <div class="bg-yellow-100 p-2 rounded-full mr-3">
-                            <i class="fas fa-exclamation-circle text-yellow-500"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-medium text-sm mb-1">Report In Progress</h4>
-                            <p class="text-gray-600 text-xs">NORECO has started working on your report about "Exposed wires on pole".</p>
-                            <p class="text-gray-400 text-xs mt-1">1 day ago</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Sample Notification -->
-                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
-                    <div class="flex items-start">
-                        <div class="bg-green-100 p-2 rounded-full mr-3">
-                            <i class="fas fa-thumbs-up text-green-500"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-medium text-sm mb-1">Thank You!</h4>
-                            <p class="text-gray-600 text-xs">NORECO appreciates your report about "Leaning pole". Our team will inspect it soon.</p>
-                            <p class="text-gray-400 text-xs mt-1">2 days ago</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </header>
 
-        <!-- Success Modal (Hidden by default) -->
-        <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 hidden">
-            <div class="bg-white rounded-lg p-6 max-w-sm mx-4">
+      <!-- Main Content - Dynamic based on navigation -->
+      <main class="p-4 pb-20">
+        <!-- Home Screen (Report Form) -->
+        <div id="homeScreen">
+          <div class="mb-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-2">
+              Report Hazardous Electricity Pole
+            </h2>
+            <p class="text-gray-600 text-sm">
+              Help keep Dumaguete City safe by reporting dangerous electricity
+              poles
+            </p>
+          </div>
+
+          <!-- Photo Capture Section -->
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-medium mb-2"
+              >Photo Evidence</label
+            >
+            <div
+              class="relative border-2 border-dashed border-gray-300 rounded-lg overflow-hidden"
+            >
+              <div
+                id="photoPreview"
+                class="photo-preview bg-gray-100 flex items-center justify-center"
+              >
                 <div class="text-center">
-                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
-                        <i class="fas fa-check text-green-600 text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-medium text-gray-900 mb-2">Report Submitted!</h3>
-                    <p class="text-sm text-gray-500 mb-4">
-                        Thank you for helping keep Dumaguete City safe. Your report has been received by NORECO.
-                    </p>
-                    <div class="flex space-x-3">
-                        <button id="viewReportBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-sm">
-                            View Report
-                        </button>
-                        <button id="newReportModalBtn" class="flex-1 bg-white hover:bg-gray-50 text-gray-700 py-2 px-4 border border-gray-300 rounded-md text-sm">
-                            New Report
-                        </button>
-                    </div>
+                  <i class="fas fa-camera text-3xl text-gray-400 mb-2"></i>
+                  <p class="text-gray-500 text-sm">
+                    Tap to take or upload photo
+                  </p>
                 </div>
+              </div>
+              <input
+                type="file"
+                id="photoInput"
+                accept="image/*"
+                capture="environment"
+                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
+              <div class="camera-icon">
+                <i class="fas fa-camera"></i>
+              </div>
             </div>
+          </div>
+
+          <!-- Description Input -->
+          <div class="mb-6">
+            <label
+              for="description"
+              class="block text-gray-700 text-sm font-medium mb-2"
+              >Description</label
+            >
+            <textarea
+              id="description"
+              rows="3"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Describe the issue (e.g. 'leaning pole', 'exposed wire', 'tree hitting wires')"
+            ></textarea>
+          </div>
+
+          <!-- Location Section -->
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-medium mb-2"
+              >Location</label
+            >
+            <div class="flex items-center mb-2">
+              <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
+              <span id="locationText" class="text-gray-600"
+                >Getting your location...</span
+              >
+            </div>
+            <div class="flex justify-between">
+              <button
+                id="refreshLocation"
+                class="text-blue-600 text-sm flex items-center"
+              >
+                <i class="fas fa-sync-alt mr-1"></i> Refresh Location
+              </button>
+              <button
+                id="manualLocationBtn"
+                class="text-blue-600 text-sm flex items-center"
+              >
+                <i class="fas fa-edit mr-1"></i> Enter Manually
+              </button>
+            </div>
+          </div>
+
+          <!-- Manual Location Input (Hidden by default) -->
+          <div id="manualLocationSection" class="mb-6 hidden">
+            <label
+              for="barangay"
+              class="block text-gray-700 text-sm font-medium mb-2"
+              >Barangay</label
+            >
+            <select
+              id="barangay"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Select Barangay</option>
+              <option value="Bagacay">Bagacay</option>
+              <option value="Bajumpandan">Bajumpandan</option>
+              <option value="Balugo">Balugo</option>
+              <option value="Banilad">Banilad</option>
+              <option value="Bantayan">Bantayan</option>
+              <option value="Bantayan">Bantayan</option>
+              <option value="Barangay 1">Barangay 1</option>
+              <option value="Barangay 2">Barangay 2</option>
+              <option value="Barangay 3">Barangay 3</option>
+              <option value="Barangay 4">Barangay 4</option>
+              <option value="Barangay 5">Barangay 5</option>
+              <option value="Barangay 6">Barangay 6</option>
+              <option value="Barangay 7">Barangay 7</option>
+              <option value="Barangay 8">Barangay 8</option>
+              <option value="Batinguel">Batinguel</option>
+              <option value="Buñao">Buñao</option>
+              <option value="Cadawinonan">Cadawinonan</option>
+              <option value="Calindagan">Calindagan</option>
+              <option value="Camanjac">Camanjac</option>
+              <option value="Candau-ay">Candau-ay</option>
+              <option value="Cantil-e">Cantil-e</option>
+              <option value="Dar">Dar</option>
+              <option value="Junob">Junob</option>
+              <option value="Looc">Looc</option>
+              <option value="Mangnao">Mangnao</option>
+              <option value="Motong">Motong</option>
+              <option value="Piapi">Piapi</option>
+              <option value="Poblacion 1">Poblacion 1</option>
+              <option value="Poblacion 2">Poblacion 2</option>
+              <option value="Poblacion 3">Poblacion 3</option>
+              <option value="Poblacion 4">Poblacion 4</option>
+              <option value="Poblacion 5">Poblacion 5</option>
+              <option value="Poblacion 6">Poblacion 6</option>
+              <option value="Poblacion 7">Poblacion 7</option>
+              <option value="Poblacion 8">Poblacion 8</option>
+              <option value="Pulantubig">Pulantubig</option>
+              <option value="Tabuc-tubig">Tabuc-tubig</option>
+              <option value="Taclobo">Taclobo</option>
+              <option value="Talay">Talay</option>
+            </select>
+
+            <label
+              for="street"
+              class="block text-gray-700 text-sm font-medium mt-3 mb-2"
+              >Street Name</label
+            >
+            <input
+              type="text"
+              id="street"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter street name"
+            />
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            id="submitReport"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md shadow-md transition duration-300 flex items-center justify-center"
+          >
+            <i class="fas fa-paper-plane mr-2"></i> Submit Report
+          </button>
+
+          <!-- Guest User Notice -->
+          <div class="mt-4 text-center text-sm text-gray-500">
+            <p>
+              By submitting, you agree to our
+              <a href="#" class="text-blue-600">Terms of Service</a>. Reports
+              are anonymous unless you
+              <a href="#" class="text-blue-600">sign in</a>.
+            </p>
+          </div>
         </div>
+
+        <!-- Reports History Screen (Hidden by default) -->
+        <div id="reportsScreen" class="hidden">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-semibold text-gray-800">Your Reports</h2>
+            <button
+              id="newReportBtn"
+              class="text-blue-600 text-sm flex items-center"
+            >
+              <i class="fas fa-plus mr-1"></i> New Report
+            </button>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Sample Report Item -->
+            <div class="border border-gray-200 rounded-lg p-4 shadow-sm">
+              <div class="flex justify-between items-start mb-2">
+                <div>
+                  <h3 class="font-medium text-gray-800">
+                    Leaning pole near intersection
+                  </h3>
+                  <p class="text-sm text-gray-500">
+                    Barangay Bantayan, Rizal Boulevard
+                  </p>
+                </div>
+                <span class="status-badge status-pending">Pending</span>
+              </div>
+              <div class="flex justify-between items-center text-sm mt-3">
+                <span class="text-gray-500">Submitted: 2 hours ago</span>
+                <button class="text-blue-600" onclick="viewReportDetails(1)">
+                  View Details
+                </button>
+              </div>
+            </div>
+
+            <!-- Sample Report Item -->
+            <div class="border border-gray-200 rounded-lg p-4 shadow-sm">
+              <div class="flex justify-between items-start mb-2">
+                <div>
+                  <h3 class="font-medium text-gray-800">
+                    Exposed wires on pole
+                  </h3>
+                  <p class="text-sm text-gray-500">
+                    Barangay Looc, Silliman Avenue
+                  </p>
+                </div>
+                <span class="status-badge status-inprogress">In Progress</span>
+              </div>
+              <div class="flex justify-between items-center text-sm mt-3">
+                <span class="text-gray-500">Submitted: 1 day ago</span>
+                <button class="text-blue-600" onclick="viewReportDetails(2)">
+                  View Details
+                </button>
+              </div>
+            </div>
+
+            <!-- Sample Report Item -->
+            <div class="border border-gray-200 rounded-lg p-4 shadow-sm">
+              <div class="flex justify-between items-start mb-2">
+                <div>
+                  <h3 class="font-medium text-gray-800">
+                    Tree branches touching wires
+                  </h3>
+                  <p class="text-sm text-gray-500">
+                    Barangay Batinguel, Hibbard Avenue
+                  </p>
+                </div>
+                <span class="status-badge status-resolved">Resolved</span>
+              </div>
+              <div class="flex justify-between items-center text-sm mt-3">
+                <span class="text-gray-500">Submitted: 1 week ago</span>
+                <button class="text-blue-600" onclick="viewReportDetails(3)">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Report Details Screen (Hidden by default) -->
+        <div id="reportDetailsScreen" class="hidden">
+          <button
+            id="backToReportsBtn"
+            class="text-blue-600 mb-4 flex items-center"
+          >
+            <i class="fas fa-arrow-left mr-2"></i> Back to Reports
+          </button>
+
+          <div class="bg-gray-100 rounded-lg overflow-hidden mb-4">
+            <div
+              id="detailPhoto"
+              class="photo-preview"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+              "
+            ></div>
+          </div>
+
+          <div class="mb-4">
+            <h3
+              id="detailTitle"
+              class="text-lg font-semibold text-gray-800 mb-1"
+            >
+              Leaning pole near intersection
+            </h3>
+            <span
+              id="detailStatus"
+              class="status-badge status-pending inline-block mb-2"
+              >Pending</span
+            >
+            <p id="detailDescription" class="text-gray-700">
+              The electricity pole near the intersection is leaning at about 45
+              degrees and looks like it might fall over soon, especially during
+              heavy rain.
+            </p>
+          </div>
+
+          <div class="border-t border-b border-gray-200 py-4 mb-4">
+            <div class="flex items-start mb-3">
+              <i class="fas fa-map-marker-alt text-gray-400 mt-1 mr-3"></i>
+              <div>
+                <h4 class="text-sm font-medium text-gray-500">Location</h4>
+                <p id="detailLocation" class="text-gray-800">
+                  Barangay Bantayan, Rizal Boulevard
+                </p>
+                <p id="detailCoordinates" class="text-xs text-gray-500">
+                  9.3057° N, 123.3064° E
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <i class="fas fa-clock text-gray-400 mt-1 mr-3"></i>
+              <div>
+                <h4 class="text-sm font-medium text-gray-500">Date & Time</h4>
+                <p id="detailDateTime" class="text-gray-800">
+                  June 15, 2023 at 2:30 PM
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="norecoResponse"
+            class="bg-blue-50 border-l-4 border-blue-500 p-3 rounded-r mb-4 hidden"
+          >
+            <h4 class="text-sm font-medium text-blue-800 mb-1">
+              NORECO Response
+            </h4>
+            <p id="responseText" class="text-blue-700 text-sm">
+              Our team has inspected the pole and will schedule repairs within
+              48 hours. Thank you for your report.
+            </p>
+            <p class="text-blue-600 text-xs mt-1">
+              Updated: June 16, 2023 at 9:15 AM
+            </p>
+          </div>
+
+          <button
+            class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-md shadow-sm transition duration-300"
+          >
+            <i class="fas fa-share-alt mr-2"></i> Share Report
+          </button>
+        </div>
+      </main>
+
+      <!-- Info Screen (Hidden by default) -->
+      <div id="infoScreen" class="hidden">
+        <h2 class="text-lg font-semibold text-gray-800 mb-4">About the App</h2>
+        <p class="text-gray-600 text-sm mb-4">
+          This app helps Dumaguete residents report hazardous electricity poles
+          directly to NORECO for quick action.
+        </p>
+
+        <div class="space-y-4">
+          <div class="p-4 bg-blue-50 rounded-lg">
+            <h3 class="font-medium text-gray-800 mb-1">How It Works</h3>
+            <p class="text-gray-600 text-sm">
+              1. Capture or upload a photo of the hazard.<br />
+              2. Provide details and location.<br />
+              3. Submit the report to NORECO.<br />
+              4. Track status updates in the Reports section.
+            </p>
+          </div>
+          <div class="p-4 bg-green-50 rounded-lg">
+            <h3 class="font-medium text-gray-800 mb-1">Emergency Contact</h3>
+            <p class="text-gray-600 text-sm">
+              For urgent hazards, call NORECO hotline:<br />
+              <span class="font-semibold text-green-700">+63 35 225 4831</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account Screen (Hidden by default) -->
+      <div id="accountScreen" class="hidden">
+        <h2 class="text-lg font-semibold text-gray-800 mb-4">My Account</h2>
+
+        <!-- If user is not signed in -->
+        <div id="guestAccount">
+          <p class="text-gray-600 text-sm mb-4">
+            You are currently signed in as a
+            <span class="font-semibold">Guest</span>.
+          </p>
+          <button
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-md shadow-md transition duration-300"
+          >
+            <i class="fas fa-sign-in-alt mr-2"></i> Sign In / Register
+          </button>
+        </div>
+
+        <!-- If user is signed in (example state) -->
+        <div id="userAccount" class="hidden">
+          <div class="flex items-center mb-4">
+            <div
+              class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-3"
+            >
+              <i class="fas fa-user text-gray-500 text-xl"></i>
+            </div>
+            <div>
+              <p class="font-medium text-gray-800">Juan Dela Cruz</p>
+              <p class="text-sm text-gray-500">juan@email.com</p>
+            </div>
+          </div>
+          <button
+            class="w-full bg-red-500 hover:bg-red-600 text-white py-3 px-4 rounded-md shadow-md transition duration-300"
+          >
+            <i class="fas fa-sign-out-alt mr-2"></i> Sign Out
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav
+        class="fixed bottom-0 w-full max-w-md bg-white border-t border-gray-200 flex justify-around py-2"
+      >
+        <button
+          onclick="showScreen('homeScreen')"
+          id="homeNav"
+          class="flex flex-col items-center text-blue-600 p-2"
+        >
+          <i class="fas fa-home text-xl"></i>
+          <span class="text-xs mt-1">Home</span>
+        </button>
+        <button
+          onclick="showScreen('reportsScreen')"
+          id="reportsNav"
+          class="flex flex-col items-center text-gray-500 p-2"
+        >
+          <i class="fas fa-list text-xl"></i>
+          <span class="text-xs mt-1">Reports</span>
+        </button>
+        <button
+          onclick="showScreen('infoScreen')"
+          id="infoNav"
+          class="flex flex-col items-center text-gray-500 p-2"
+        >
+          <i class="fas fa-info-circle text-xl"></i>
+          <span class="text-xs mt-1">Info</span>
+        </button>
+        <button
+          onclick="showScreen('accountScreen')"
+          id="accountNav"
+          class="flex flex-col items-center text-gray-500 p-2"
+        >
+          <i class="fas fa-user text-xl"></i>
+          <span class="text-xs mt-1">Account</span>
+        </button>
+      </nav>
+
+      <!-- Notification Panel (Hidden by default) -->
+      <div
+        id="notificationPanel"
+        class="fixed top-0 right-0 h-full w-72 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-10"
+      >
+        <div
+          class="p-4 border-b border-gray-200 flex justify-between items-center"
+        >
+          <h3 class="font-medium">Notifications</h3>
+          <button id="closeNotifBtn" class="text-gray-500">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="overflow-y-auto h-full pb-20">
+          <!-- Sample Notification -->
+          <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+            <div class="flex items-start">
+              <div class="bg-blue-100 p-2 rounded-full mr-3">
+                <i class="fas fa-check-circle text-blue-500"></i>
+              </div>
+              <div>
+                <h4 class="font-medium text-sm mb-1">Report Resolved</h4>
+                <p class="text-gray-600 text-xs">
+                  Your report about "Tree branches touching wires" has been
+                  resolved by NORECO.
+                </p>
+                <p class="text-gray-400 text-xs mt-1">2 hours ago</p>
+              </div>
+            </div>
+          </div>
+          <!-- Sample Notification -->
+          <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+            <div class="flex items-start">
+              <div class="bg-yellow-100 p-2 rounded-full mr-3">
+                <i class="fas fa-exclamation-circle text-yellow-500"></i>
+              </div>
+              <div>
+                <h4 class="font-medium text-sm mb-1">Report In Progress</h4>
+                <p class="text-gray-600 text-xs">
+                  NORECO has started working on your report about "Exposed wires
+                  on pole".
+                </p>
+                <p class="text-gray-400 text-xs mt-1">1 day ago</p>
+              </div>
+            </div>
+          </div>
+          <!-- Sample Notification -->
+          <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+            <div class="flex items-start">
+              <div class="bg-green-100 p-2 rounded-full mr-3">
+                <i class="fas fa-thumbs-up text-green-500"></i>
+              </div>
+              <div>
+                <h4 class="font-medium text-sm mb-1">Thank You!</h4>
+                <p class="text-gray-600 text-xs">
+                  NORECO appreciates your report about "Leaning pole". Our team
+                  will inspect it soon.
+                </p>
+                <p class="text-gray-400 text-xs mt-1">2 days ago</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success Modal (Hidden by default) -->
+      <div
+        id="successModal"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20 hidden"
+      >
+        <div class="bg-white rounded-lg p-6 max-w-sm mx-4">
+          <div class="text-center">
+            <div
+              class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4"
+            >
+              <i class="fas fa-check text-green-600 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">
+              Report Submitted!
+            </h3>
+            <p class="text-sm text-gray-500 mb-4">
+              Thank you for helping keep Dumaguete City safe. Your report has
+              been received by NORECO.
+            </p>
+            <div class="flex space-x-3">
+              <button
+                id="viewReportBtn"
+                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-sm"
+              >
+                View Report
+              </button>
+              <button
+                id="newReportModalBtn"
+                class="flex-1 bg-white hover:bg-gray-50 text-gray-700 py-2 px-4 border border-gray-300 rounded-md text-sm"
+              >
+                New Report
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script>
-        // DOM Elements
-        const homeScreen = document.getElementById('homeScreen');
-        const reportsScreen = document.getElementById('reportsScreen');
-        const reportDetailsScreen = document.getElementById('reportDetailsScreen');
-        const homeNav = document.getElementById('homeNav');
-        const reportsNav = document.getElementById('reportsNav');
-        const newReportBtn = document.getElementById('newReportBtn');
-        const backToReportsBtn = document.getElementById('backToReportsBtn');
-        const photoInput = document.getElementById('photoInput');
-        const photoPreview = document.getElementById('photoPreview');
-        const locationText = document.getElementById('locationText');
-        const refreshLocation = document.getElementById('refreshLocation');
-        const manualLocationBtn = document.getElementById('manualLocationBtn');
-        const manualLocationSection = document.getElementById('manualLocationSection');
-        const submitReport = document.getElementById('submitReport');
-        const notificationPanel = document.getElementById('notificationPanel');
-        const notifBtn = document.getElementById('notifBtn');
-        const closeNotifBtn = document.getElementById('closeNotifBtn');
-        const successModal = document.getElementById('successModal');
-        const viewReportBtn = document.getElementById('viewReportBtn');
-        const newReportModalBtn = document.getElementById('newReportModalBtn');
-
-        // Sample coordinates for Dumaguete City
-        const sampleCoordinates = [
-            { lat: 9.3057, lng: 123.3064, address: "Rizal Boulevard, Barangay Bantayan" },
-            { lat: 9.3100, lng: 123.3080, address: "Silliman Avenue, Barangay Looc" },
-            { lat: 9.3150, lng: 123.3020, address: "Hibbard Avenue, Barangay Batinguel" }
-        ];
-
-        // Initialize the app
-        function initApp() {
-            // Set up event listeners
-            homeNav.addEventListener('click', showHomeScreen);
-            reportsNav.addEventListener('click', showReportsScreen);
-            newReportBtn.addEventListener('click', showHomeScreen);
-            backToReportsBtn.addEventListener('click', showReportsScreen);
-            photoInput.addEventListener('change', handlePhotoUpload);
-            refreshLocation.addEventListener('click', getLocation);
-            manualLocationBtn.addEventListener('click', toggleManualLocation);
-            submitReport.addEventListener('click', submitReportHandler);
-            notifBtn.addEventListener('click', toggleNotificationPanel);
-            closeNotifBtn.addEventListener('click', toggleNotificationPanel);
-            viewReportBtn.addEventListener('click', () => {
-                successModal.classList.add('hidden');
-                showReportsScreen();
-            });
-            newReportModalBtn.addEventListener('click', () => {
-                successModal.classList.add('hidden');
-                resetForm();
-            });
-
-            // Simulate getting location on page load
-            getLocation();
-        }
-
-        // Navigation functions
-        function showHomeScreen() {
-            homeScreen.classList.remove('hidden');
-            reportsScreen.classList.add('hidden');
-            reportDetailsScreen.classList.add('hidden');
-            homeNav.querySelector('i').classList.add('text-blue-600');
-            homeNav.querySelector('i').classList.remove('text-gray-500');
-            homeNav.querySelector('span').classList.add('text-blue-600');
-            homeNav.querySelector('span').classList.remove('text-gray-500');
-            reportsNav.querySelector('i').classList.add('text-gray-500');
-            reportsNav.querySelector('i').classList.remove('text-blue-600');
-            reportsNav.querySelector('span').classList.add('text-gray-500');
-            reportsNav.querySelector('span').classList.remove('text-blue-600');
-        }
-
-        function showReportsScreen() {
-            homeScreen.classList.add('hidden');
-            reportsScreen.classList.remove('hidden');
-            reportDetailsScreen.classList.add('hidden');
-            homeNav.querySelector('i').classList.add('text-gray-500');
-            homeNav.querySelector('i').classList.remove('text-blue-600');
-            homeNav.querySelector('span').classList.add('text-gray-500');
-            homeNav.querySelector('span').classList.remove('text-blue-600');
-            reportsNav.querySelector('i').classList.add('text-blue-600');
-            reportsNav.querySelector('i').classList.remove('text-gray-500');
-            reportsNav.querySelector('span').classList.add('text-blue-600');
-            reportsNav.querySelector('span').classList.remove('text-gray-500');
-        }
-
-        function viewReportDetails(reportId) {
-            homeScreen.classList.add('hidden');
-            reportsScreen.classList.add('hidden');
-            reportDetailsScreen.classList.remove('hidden');
-
-            // In a real app, we would fetch report details based on reportId
-            // For demo purposes, we'll just show sample data
-            if (reportId === 1) {
-                document.getElementById('detailTitle').textContent = "Leaning pole near intersection";
-                document.getElementById('detailStatus').textContent = "Pending";
-                document.getElementById('detailStatus').className = "status-badge status-pending inline-block mb-2";
-                document.getElementById('detailDescription').textContent = "The electricity pole near the intersection is leaning at about 45 degrees and looks like it might fall over soon, especially during heavy rain.";
-                document.getElementById('detailLocation').textContent = "Barangay Bantayan, Rizal Boulevard";
-                document.getElementById('detailCoordinates').textContent = "9.3057° N, 123.3064° E";
-                document.getElementById('detailDateTime').textContent = "June 15, 2023 at 2:30 PM";
-                document.getElementById('detailPhoto').style.backgroundImage = "url('https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')";
-                document.getElementById('norecoResponse').classList.add('hidden');
-            } else if (reportId === 2) {
-                document.getElementById('detailTitle').textContent = "Exposed wires on pole";
-                document.getElementById('detailStatus').textContent = "In Progress";
-                document.getElementById('detailStatus').className = "status-badge status-inprogress inline-block mb-2";
-                document.getElementById('detailDescription').textContent = "Several wires are exposed at the base of the pole, creating a potential electrocution hazard, especially when it rains.";
-                document.getElementById('detailLocation').textContent = "Barangay Looc, Silliman Avenue";
-                document.getElementById('detailCoordinates').textContent = "9.3100° N, 123.3080° E";
-                document.getElementById('detailDateTime').textContent = "June 14, 2023 at 10:15 AM";
-                document.getElementById('detailPhoto').style.backgroundImage = "url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')";
-                document.getElementById('norecoResponse').classList.remove('hidden');
-                document.getElementById('responseText').textContent = "Our team has inspected the pole and will schedule repairs within 48 hours. Thank you for your report.";
-            } else if (reportId === 3) {
-                document.getElementById('detailTitle').textContent = "Tree branches touching wires";
-                document.getElementById('detailStatus').textContent = "Resolved";
-                document.getElementById('detailStatus').className = "status-badge status-resolved inline-block mb-2";
-                document.getElementById('detailDescription').textContent = "Large branches from a mango tree are touching the power lines and causing sparks during windy conditions.";
-                document.getElementById('detailLocation').textContent = "Barangay Batinguel, Hibbard Avenue";
-                document.getElementById('detailCoordinates').textContent = "9.3150° N, 123.3020° E";
-                document.getElementById('detailDateTime').textContent = "June 8, 2023 at 4:45 PM";
-                document.getElementById('detailPhoto').style.backgroundImage = "url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')";
-                document.getElementById('norecoResponse').classList.remove('hidden');
-                document.getElementById('responseText').textContent = "The tree branches have been trimmed and the issue has been resolved. Thank you for helping keep our community safe.";
-            }
-        }
-
-        // Photo upload handler
-        function handlePhotoUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    photoPreview.style.backgroundImage = `url(${e.target.result})`;
-                    photoPreview.innerHTML = '';
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Location functions
-        function getLocation() {
-            // In a real app, this would use the Geolocation API
-            // For demo purposes, we'll use sample coordinates
-            locationText.textContent = "Getting your location...";
-            
-            // Simulate API delay
-            setTimeout(() => {
-                const randomLocation = sampleCoordinates[Math.floor(Math.random() * sampleCoordinates.length)];
-                locationText.textContent = randomLocation.address;
-            }, 1500);
-        }
-
-        function toggleManualLocation() {
-            manualLocationSection.classList.toggle('hidden');
-            if (manualLocationSection.classList.contains('hidden')) {
-                manualLocationBtn.innerHTML = '<i class="fas fa-edit mr-1"></i> Enter Manually';
-            } else {
-                manualLocationBtn.innerHTML = '<i class="fas fa-times mr-1"></i> Cancel';
-            }
-        }
-
-        // Form submission
-        function submitReportHandler() {
-            const description = document.getElementById('description').value;
-            
-            if (!description) {
-                alert('Please provide a description of the issue');
-                return;
-            }
-            
-            // In a real app, this would send data to a backend API
-            // For demo purposes, we'll just show a success modal
-            successModal.classList.remove('hidden');
-        }
-
-        function resetForm() {
-            document.getElementById('description').value = '';
-            photoPreview.style.backgroundImage = '';
-            photoPreview.innerHTML = `
-                <div class="text-center">
-                    <i class="fas fa-camera text-3xl text-gray-400 mb-2"></i>
-                    <p class="text-gray-500 text-sm">Tap to take or upload photo</p>
-                </div>
-            `;
-            getLocation();
-            if (!manualLocationSection.classList.contains('hidden')) {
-                toggleManualLocation();
-            }
-        }
-
-        // Notification panel
-        function toggleNotificationPanel() {
-            notificationPanel.classList.toggle('translate-x-full');
-        }
-
-        // Initialize the app when DOM is loaded
-        document.addEventListener('DOMContentLoaded', initApp);
-    </script>
-</body>
+    <script src="assets/javascript/app.js"></script>
+  </body>
 </html>
