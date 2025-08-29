@@ -1,142 +1,166 @@
-// Show initial screen
-document.addEventListener("DOMContentLoaded", function () {
-  showScreen("homeScreen");
-  initCharts();
-  setupConditionButtons();
-  setupSeverityButtons();
-});
+// ========================
+// PoleWatch App JS
+// ========================
 
-// Screen navigation
-function showScreen(screenId) {
-  // Hide all screens
-  document.querySelectorAll("#contentArea > div").forEach((div) => {
-    div.classList.add("hidden");
-    div.classList.remove("slide-in");
+document.addEventListener("DOMContentLoaded", initApp);
+
+// Screen DOM elements
+const homeScreen = document.getElementById("homeScreen");
+const reportsScreen = document.getElementById("reportsScreen");
+const reportDetailsScreen = document.getElementById("reportDetailsScreen");
+const infoScreen = document.getElementById("infoScreen");
+const accountScreen = document.getElementById("accountScreen");
+
+// Nav buttons
+const homeNav = document.getElementById("homeNav");
+const reportsNav = document.getElementById("reportsNav");
+const infoNav = document.getElementById("infoNav");
+const accountNav = document.getElementById("accountNav");
+
+// Other DOM elements
+const newReportBtn = document.getElementById("newReportBtn");
+const backToReportsBtn = document.getElementById("backToReportsBtn");
+const reportForm = document.getElementById("reportForm");
+const captureBtn = document.getElementById("captureBtn");
+const photoUpload = document.getElementById("photoUpload");
+const previewImage = document.getElementById("previewImage");
+
+// Account states
+const guestAccount = document.getElementById("guestAccount");
+const userAccount = document.getElementById("userAccount");
+
+// ========================
+// INIT
+// ========================
+function initApp() {
+  // Navigation
+  homeNav.addEventListener("click", showHomeScreen);
+  reportsNav.addEventListener("click", showReportsScreen);
+  infoNav.addEventListener("click", showInfoScreen);
+  accountNav.addEventListener("click", showAccountScreen);
+
+  // Other actions
+  if (newReportBtn) newReportBtn.addEventListener("click", showHomeScreen);
+  if (backToReportsBtn) backToReportsBtn.addEventListener("click", showReportsScreen);
+  if (reportForm) reportForm.addEventListener("submit", handleReportSubmit);
+  if (captureBtn) captureBtn.addEventListener("click", () => photoUpload.click());
+  if (photoUpload) photoUpload.addEventListener("change", handlePhotoUpload);
+
+  // Account login/logout toggle
+  setupAccountButtons();
+
+  // Try to get location
+  getLocation();
+
+  // Start on Home
+  showHomeScreen();
+}
+
+// ========================
+// SCREEN HANDLING
+// ========================
+function resetScreens() {
+  homeScreen.classList.add("hidden");
+  reportsScreen.classList.add("hidden");
+  reportDetailsScreen.classList.add("hidden");
+  infoScreen.classList.add("hidden");
+  accountScreen.classList.add("hidden");
+
+  // Reset nav colors
+  [homeNav, reportsNav, infoNav, accountNav].forEach((nav) => {
+    nav.querySelector("i").classList.add("text-gray-500");
+    nav.querySelector("i").classList.remove("text-blue-600");
+    nav.querySelector("span").classList.add("text-gray-500");
+    nav.querySelector("span").classList.remove("text-blue-600");
   });
+}
 
-  // Show selected screen
-  const screen = document.getElementById(screenId);
-  screen.classList.remove("hidden");
-  screen.classList.add("slide-in");
+function showHomeScreen() {
+  resetScreens();
+  homeScreen.classList.remove("hidden");
+  setActiveNav(homeNav);
+}
 
-  // Update active nav item
-  document.querySelectorAll(".nav-item").forEach((item) => {
-    item.classList.remove("active", "text-blue-600");
-    item.classList.add("text-gray-500");
-  });
+function showReportsScreen() {
+  resetScreens();
+  reportsScreen.classList.remove("hidden");
+  setActiveNav(reportsNav);
+}
 
-  // Set active based on screen
-  let activeIcon = "";
-  switch (screenId) {
-    case "homeScreen":
-      activeIcon = "fa-home";
-      break;
-    case "reportScreen":
-      activeIcon = "fa-plus-circle";
-      break;
-    case "mapScreen":
-      activeIcon = "fa-map-marked-alt";
-      break;
-    case "analyticsScreen":
-      activeIcon = "fa-chart-bar";
-      break;
+function showInfoScreen() {
+  resetScreens();
+  infoScreen.classList.remove("hidden");
+  setActiveNav(infoNav);
+}
+
+function showAccountScreen() {
+  resetScreens();
+  accountScreen.classList.remove("hidden");
+  setActiveNav(accountNav);
+}
+
+function setActiveNav(nav) {
+  nav.querySelector("i").classList.replace("text-gray-500", "text-blue-600");
+  nav.querySelector("span").classList.replace("text-gray-500", "text-blue-600");
+}
+
+// ========================
+// REPORT HANDLING
+// ========================
+function handleReportSubmit(e) {
+  e.preventDefault();
+  alert("Report submitted successfully!");
+  showReportsScreen();
+}
+
+function handlePhotoUpload(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      previewImage.src = e.target.result;
+      previewImage.classList.remove("hidden");
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+// ========================
+// LOCATION HANDLING
+// ========================
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log("Latitude:", position.coords.latitude);
+        console.log("Longitude:", position.coords.longitude);
+      },
+      (error) => {
+        console.warn("Location error:", error.message);
+      }
+    );
+  }
+}
+
+// ========================
+// ACCOUNT HANDLING
+// ========================
+function setupAccountButtons() {
+  // Guest → Sign In
+  const signInBtn = guestAccount?.querySelector("button");
+  if (signInBtn) {
+    signInBtn.addEventListener("click", () => {
+      guestAccount.classList.add("hidden");
+      userAccount.classList.remove("hidden");
+    });
   }
 
-  document.querySelectorAll(".nav-item").forEach((item) => {
-    if (item.querySelector(`.${activeIcon}`)) {
-      item.classList.add("active", "text-blue-600");
-      item.classList.remove("text-gray-500");
-    }
-  });
-}
-
-// Submit report function
-function submitReport() {
-  showScreen("successScreen");
-}
-
-// Initialize charts
-function initCharts() {
-  // Severity Chart
-  const severityCtx = document.getElementById("severityChart").getContext("2d");
-  new Chart(severityCtx, {
-    type: "doughnut",
-    data: {
-      labels: ["Low Risk", "Medium Risk", "High Risk"],
-      datasets: [
-        {
-          data: [12, 8, 5],
-          backgroundColor: ["#10B981", "#F59E0B", "#EF4444"],
-          borderWidth: 0,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { position: "bottom" },
-      },
-    },
-  });
-
-  // Hazard Chart
-  const hazardCtx = document.getElementById("hazardChart").getContext("2d");
-  new Chart(hazardCtx, {
-    type: "bar",
-    data: {
-      labels: [
-        "Exposed Wires",
-        "Blocking Sidewalk",
-        "Near School",
-        "Near Hospital",
-        "Other",
-      ],
-      datasets: [
-        {
-          label: "Reports",
-          data: [8, 5, 3, 2, 4],
-          backgroundColor: "#3B82F6",
-          borderRadius: 4,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: { stepSize: 2 },
-        },
-      },
-      plugins: { legend: { display: false } },
-    },
-  });
-}
-
-// Setup condition buttons
-function setupConditionButtons() {
-  const buttons = document.querySelectorAll(".condition-btn");
-  buttons.forEach((button) => {
-    button.addEventListener("click", function () {
-      buttons.forEach((btn) =>
-        btn.classList.remove("border-blue-500", "bg-blue-50")
-      );
-      this.classList.add("border-blue-500", "bg-blue-50");
+  // User → Sign Out
+  const signOutBtn = userAccount?.querySelector("button");
+  if (signOutBtn) {
+    signOutBtn.addEventListener("click", () => {
+      userAccount.classList.add("hidden");
+      guestAccount.classList.remove("hidden");
     });
-  });
-}
-
-// Setup severity buttons
-function setupSeverityButtons() {
-  const buttons = document.querySelectorAll(".severity-btn");
-  buttons.forEach((button) => {
-    button.addEventListener("click", function () {
-      buttons.forEach((btn) => {
-        btn.classList.remove("ring-2", "ring-offset-2", "ring-blue-500");
-      });
-      this.classList.add("ring-2", "ring-offset-2", "ring-blue-500");
-    });
-  });
+  }
 }

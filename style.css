@@ -1,68 +1,41 @@
-   .gradient-bg {
-        background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
-      }
-      .slide-in {
-        animation: slideIn 0.3s ease-out forwards;
-      }
-      @keyframes slideIn {
-        from {
-          transform: translateY(20px);
-          opacity: 0;
+        /* Custom CSS for elements that need more precise styling */
+        .camera-icon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            padding: 8px;
+            color: white;
         }
-        to {
-          transform: translateY(0);
-          opacity: 1;
+        .photo-preview {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
         }
-      }
-      .success-check {
-        animation: checkBounce 0.6s ease-in-out;
-      }
-      @keyframes checkBounce {
-        0% {
-          transform: scale(0);
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
         }
-        50% {
-          transform: scale(1.2);
+        .status-pending {
+            background-color: #FEF3C7;
+            color: #92400E;
         }
-        100% {
-          transform: scale(1);
+        .status-inprogress {
+            background-color: #DBEAFE;
+            color: #1E40AF;
         }
-      }
-      .map-container {
-        height: 300px;
-        width: 100%;
-        background-color: #e5e7eb;
-        position: relative;
-        overflow: hidden;
-      }
-      .map-placeholder {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #e5e7eb;
-        color: #6b7280;
-        font-weight: 500;
-      }
-      .hazard-chip {
-        transition: all 0.2s ease;
-      }
-      .hazard-chip:hover {
-        transform: translateY(-2px);
-      }
-      .photo-preview {
-        transition: all 0.3s ease;
-      }
-      .photo-preview:hover {
-        transform: scale(1.05);
-      }
-      .nav-item {
-        transition: all 0.2s ease;
-      }
-      .nav-item.active {
-        transform: translateY(-5px);
-      }
+        .status-resolved {
+            background-color: #D1FAE5;
+            color: #065F46;
+        }
+        /* Animation for notifications */
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        .notification {
+            animation: slideIn 0.3s ease-out;
+        }
