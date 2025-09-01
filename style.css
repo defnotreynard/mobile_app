@@ -1,41 +1,44 @@
-        /* Custom CSS for elements that need more precise styling */
-        .camera-icon {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.5);
-            border-radius: 50%;
-            padding: 8px;
-            color: white;
+ .particle {
+        position: absolute;
+        background-color: rgba(250, 204, 21, 0.3);
+        border-radius: 50%;
+      }
+      .timeline-step:not(:last-child):after {
+        content: "";
+        position: absolute;
+        top: 36px;
+        left: 50%;
+        bottom: -20px;
+        width: 2px;
+        background: linear-gradient(to bottom, #facc15, transparent);
+        transform: translateX(-50%);
+      }
+      .service-card:hover .service-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+      .testimonial-slide {
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      input:focus,
+      textarea:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3);
+      }
+      .checkbox:checked {
+        background-color: #facc15;
+        border-color: #facc15;
+      }
+      .floating {
+        animation: float 6s ease-in-out infinite;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
         }
-        .photo-preview {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
+        50% {
+          transform: translateY(-20px);
         }
-        .status-badge {
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
+        100% {
+          transform: translateY(0px);
         }
-        .status-pending {
-            background-color: #FEF3C7;
-            color: #92400E;
-        }
-        .status-inprogress {
-            background-color: #DBEAFE;
-            color: #1E40AF;
-        }
-        .status-resolved {
-            background-color: #D1FAE5;
-            color: #065F46;
-        }
-        /* Animation for notifications */
-        @keyframes slideIn {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
-        }
-        .notification {
-            animation: slideIn 0.3s ease-out;
-        }
+      }
