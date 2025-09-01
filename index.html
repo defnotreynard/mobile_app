@@ -1,147 +1,1287 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Event Venue & Services | Dumaguete City</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <style>
-    .gradient-bg {
-      background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
-    }
-  </style>
-</head>
-<body class="font-sans bg-gray-50 text-gray-800">
-  <!-- Navbar -->
-  <header class="fixed top-0 left-0 w-full bg-white shadow z-50">
-    <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
-      <h1 class="text-xl font-bold text-indigo-600">Dumaguete Events</h1>
-      <nav>
-        <ul class="flex space-x-6 font-medium">
-          <li><a href="#intro" class="hover:text-indigo-600">About</a></li>
-          <li><a href="#services" class="hover:text-indigo-600">Services</a></li>
-          <li><a href="#features" class="hover:text-indigo-600">Features</a></li>
-          <li><a href="#objectives" class="hover:text-indigo-600">Objectives</a></li>
-          <li><a href="#benefits" class="hover:text-indigo-600">Benefits</a></li>
-          <li><a href="#contact" class="hover:text-indigo-600">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="gradient-bg text-white h-screen flex flex-col justify-center items-center text-center px-6" data-aos="fade-up">
-    <h2 class="text-4xl md:text-6xl font-bold mb-6 animate-bounce">Plan Your Perfect Event</h2>
-    <p class="max-w-2xl text-lg md:text-xl mb-8">From weddings and birthdays to corporate meetings—our all-in-one platform in Dumaguete City makes event planning simple, smooth, and stress-free.</p>
-    <a href="#contact" class="bg-white text-indigo-600 px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transition">Book Now</a>
-  </section>
-
-  <!-- Introduction -->
-  <section id="intro" class="max-w-6xl mx-auto py-20 px-6" data-aos="fade-right">
-    <h3 class="text-3xl font-bold text-indigo-600 mb-6">Introduction</h3>
-    <p class="text-lg leading-relaxed">
-      Event planning can be stressful, requiring multiple suppliers and endless coordination. Our platform offers a spacious venue with complete services—all managed in one centralized online system.
-    </p>
-  </section>
-
-  <!-- Services -->
-  <section id="services" class="bg-gray-100 py-20 px-6">
-    <div class="max-w-6xl mx-auto" data-aos="fade-up">
-      <h3 class="text-3xl font-bold text-indigo-600 mb-12 text-center">Event Services</h3>
-      <div class="grid md:grid-cols-3 gap-10">
-        <div class="bg-white shadow-lg rounded-2xl p-6 hover:scale-105 transition">
-          <h4 class="font-semibold text-xl mb-3">🍽 Catering</h4>
-          <p>Customizable menus for any occasion.</p>
-        </div>
-        <div class="bg-white shadow-lg rounded-2xl p-6 hover:scale-105 transition">
-          <h4 class="font-semibold text-xl mb-3">📋 Planning</h4>
-          <p>Professional event planners to manage every detail.</p>
-        </div>
-        <div class="bg-white shadow-lg rounded-2xl p-6 hover:scale-105 transition">
-          <h4 class="font-semibold text-xl mb-3">🎨 Decorations</h4>
-          <p>From elegant designs to themed setups.</p>
-        </div>
-        <div class="bg-white shadow-lg rounded-2xl p-6 hover:scale-105 transition">
-          <h4 class="font-semibold text-xl mb-3">🔊 Sound & Lighting</h4>
-          <p>High-quality audio-visual equipment.</p>
-        </div>
-        <div class="bg-white shadow-lg rounded-2xl p-6 hover:scale-105 transition">
-          <h4 class="font-semibold text-xl mb-3">📸 Photo & Video</h4>
-          <p>Capture and preserve every memory.</p>
-        </div>
-        <div class="bg-white shadow-lg rounded-2xl p-6 hover:scale-105 transition">
-          <h4 class="font-semibold text-xl mb-3">🎶 Entertainment</h4>
-          <p>Live bands, DJs, and performers.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventEase Dumaguete | Venue Booking & Event Services</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs/lib/anime.iife.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0f172a",
+              secondary: "#facc15",
+              accent: "#1e40af",
+              light: "#f8fafc",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              display: ["Playfair Display", "serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .particle {
+        position: absolute;
+        background-color: rgba(250, 204, 21, 0.3);
+        border-radius: 50%;
+      }
+      .timeline-step:not(:last-child):after {
+        content: "";
+        position: absolute;
+        top: 36px;
+        left: 50%;
+        bottom: -20px;
+        width: 2px;
+        background: linear-gradient(to bottom, #facc15, transparent);
+        transform: translateX(-50%);
+      }
+      .service-card:hover .service-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+      .testimonial-slide {
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      input:focus,
+      textarea:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3);
+      }
+      .checkbox:checked {
+        background-color: #facc15;
+        border-color: #facc15;
+      }
+      .floating {
+        animation: float 6s ease-in-out infinite;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+    </style>
+  </head>
+  <body class="font-sans text-primary bg-light">
+    <!-- Navigation -->
+    <nav
+      class="fixed w-full bg-primary text-white z-50 transition-all duration-300 shadow-md"
+    >
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <a href="#" class="text-2xl font-bold flex items-center">
+            <span class="text-secondary">Event</span>Ease
+          </a>
+          <div class="hidden md:flex space-x-8">
+            <a href="#features" class="hover:text-secondary transition-colors"
+              >Features</a
+            >
+            <a href="#services" class="hover:text-secondary transition-colors"
+              >Services</a
+            >
+            <a
+              href="#how-it-works"
+              class="hover:text-secondary transition-colors"
+              >How It Works</a
+            >
+            <a
+              href="#testimonials"
+              class="hover:text-secondary transition-colors"
+              >Testimonials</a
+            >
+            <a href="#contact" class="hover:text-secondary transition-colors"
+              >Contact</a
+            >
+          </div>
+          <div class="flex items-center space-x-4">
+            <button
+              class="hidden md:block px-4 py-2 rounded-md bg-secondary text-primary font-semibold hover:bg-opacity-90 transition-colors"
+            >
+              Login
+            </button>
+            <button class="md:hidden">
+              <i data-feather="menu" class="text-white"></i>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- Features -->
-  <section id="features" class="max-w-6xl mx-auto py-20 px-6" data-aos="fade-left">
-    <h3 class="text-3xl font-bold text-indigo-600 mb-6">System Features</h3>
-    <ul class="space-y-4 text-lg">
-      <li>✅ Real-time venue details, pricing, and availability</li>
-      <li>✅ Customizable event packages</li>
-      <li>✅ Secure online payment (GCash, Maya, bank transfer, card)</li>
-      <li>✅ Direct communication with event team</li>
-    </ul>
-  </section>
-
-  <!-- Objectives -->
-  <section id="objectives" class="bg-gray-100 py-20 px-6">
-    <div class="max-w-6xl mx-auto" data-aos="zoom-in">
-      <h3 class="text-3xl font-bold text-indigo-600 mb-6">Objectives</h3>
-      <ul class="list-disc pl-6 space-y-2 text-lg">
-        <li>Simplify event planning by integrating venue and services.</li>
-        <li>Provide real-time venue availability to avoid conflicts.</li>
-        <li>Offer customizable event packages.</li>
-        <li>Support secure and convenient online payments.</li>
-        <li>Ensure smooth communication with clients.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Benefits -->
-  <section id="benefits" class="max-w-6xl mx-auto py-20 px-6" data-aos="fade-up">
-    <h3 class="text-3xl font-bold text-indigo-600 mb-6">Benefits</h3>
-    <div class="grid md:grid-cols-2 gap-10">
-      <div class="bg-white p-6 shadow rounded-xl">
-        <h4 class="font-semibold mb-2">For Clients</h4>
-        <p>Stress-free planning with everything in one place.</p>
+    <!-- Hero Section -->
+    <section
+      class="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary to-accent"
+    >
+      <div id="particles-container" class="absolute inset-0"></div>
+      <div
+        class="container mx-auto px-4 z-10 text-center text-white"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+      >
+        <h1 class="text-4xl md:text-6xl font-display font-bold mb-6">
+          Book Your Dream Event in One Place
+        </h1>
+        <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">
+          Seamless Venue Booking & Complete Event Services in Dumaguete City
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <button
+            class="px-8 py-4 bg-secondary text-primary font-bold rounded-md hover:bg-opacity-90 transition-all transform hover:-translate-y-1 shadow-lg"
+          >
+            Book Now
+          </button>
+          <button
+            class="px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-md hover:bg-white hover:text-primary transition-all transform hover:-translate-y-1"
+          >
+            Explore Packages
+          </button>
+        </div>
       </div>
-      <div class="bg-white p-6 shadow rounded-xl">
-        <h4 class="font-semibold mb-2">For Venue Owners</h4>
-        <p>Increased bookings and efficient management.</p>
+      <div
+        class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+      >
+        <i data-feather="arrow-down" class="text-white"></i>
       </div>
-      <div class="bg-white p-6 shadow rounded-xl">
-        <h4 class="font-semibold mb-2">For Suppliers</h4>
-        <p>Wider market reach by being integrated into the system.</p>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-3xl md:text-4xl font-display font-bold text-center mb-16"
+          data-aos="fade-up"
+        >
+          Why Choose EventEase?
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Feature 1 -->
+          <div
+            class="bg-light p-8 rounded-xl shadow-md hover:shadow-xl transition-all"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div
+              class="w-16 h-16 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mb-6"
+            >
+              <i data-feather="clock" class="text-secondary w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Real-time Booking</h3>
+            <p class="text-gray-600">
+              Instantly check availability and book your preferred venue with
+              our live calendar system.
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div
+            class="bg-light p-8 rounded-xl shadow-md hover:shadow-xl transition-all"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div
+              class="w-16 h-16 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mb-6"
+            >
+              <i data-feather="package" class="text-secondary w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Custom Packages</h3>
+            <p class="text-gray-600">
+              Tailor-made event packages that suit your specific needs and
+              budget requirements.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div
+            class="bg-light p-8 rounded-xl shadow-md hover:shadow-xl transition-all"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div
+              class="w-16 h-16 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mb-6"
+            >
+              <i data-feather="credit-card" class="text-secondary w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Online Payments</h3>
+            <p class="text-gray-600">
+              Secure and convenient payment processing with multiple options
+              available.
+            </p>
+          </div>
+
+          <!-- Feature 4 -->
+          <div
+            class="bg-light p-8 rounded-xl shadow-md hover:shadow-xl transition-all"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            <div
+              class="w-16 h-16 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mb-6"
+            >
+              <i
+                data-feather="message-square"
+                class="text-secondary w-8 h-8"
+              ></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Easy Communication</h3>
+            <p class="text-gray-600">
+              Direct messaging with venue managers and service providers for
+              seamless coordination.
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="bg-white p-6 shadow rounded-xl">
-        <h4 class="font-semibold mb-2">For Dumaguete City</h4>
-        <p>Boosts local event industry and tourism.</p>
+    </section>
+
+    <!-- Stats Counter -->
+    <section class="py-16 bg-primary text-white">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div data-aos="fade-up" data-aos-delay="100">
+            <div
+              class="text-4xl md:text-5xl font-bold mb-2 counter"
+              data-count="100"
+            >
+              0
+            </div>
+            <p class="text-secondary">Venues Available</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="200">
+            <div
+              class="text-4xl md:text-5xl font-bold mb-2 counter"
+              data-count="500"
+            >
+              0
+            </div>
+            <p class="text-secondary">Events Hosted</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="300">
+            <div
+              class="text-4xl md:text-5xl font-bold mb-2 counter"
+              data-count="98"
+            >
+              0
+            </div>
+            <p class="text-secondary">Satisfaction Rate</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="400">
+            <div
+              class="text-4xl md:text-5xl font-bold mb-2 counter"
+              data-count="24"
+            >
+              0
+            </div>
+            <p class="text-secondary">Support Hours</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Conclusion / CTA -->
-  <section id="contact" class="gradient-bg text-white py-20 px-6 text-center" data-aos="fade-up">
-    <h3 class="text-3xl font-bold mb-6">Plan Your Event With Us</h3>
-    <p class="max-w-2xl mx-auto mb-8">Our all-in-one solution ensures every wedding, birthday, or corporate gathering is handled with convenience, efficiency, and professional coordination.</p>
-    <a href="mailto:info@dumagueteevents.com" class="bg-white text-indigo-600 px-8 py-4 rounded-full font-bold shadow-lg hover:bg-gray-100 transition">Contact Us</a>
-  </section>
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-light">
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-3xl md:text-4xl font-display font-bold text-center mb-4"
+          data-aos="fade-up"
+        >
+          Complete Event Services
+        </h2>
+        <p
+          class="text-xl text-center text-gray-600 mb-16 max-w-3xl mx-auto"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          From venue selection to the final cleanup, we provide everything you
+          need for a perfect event.
+        </p>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-300 py-6 text-center">
-    <p>&copy; 2025 Dumaguete Events. All Rights Reserved.</p>
-  </footer>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <!-- Service 1 -->
+          <div
+            class="service-card bg-white p-6 rounded-xl shadow-md text-center group cursor-pointer"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div
+              class="w-16 h-16 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mb-4 mx-auto service-icon transition-transform"
+            >
+              <i data-feather="coffee" class="text-secondary w-8 h-8"></i>
+            </div>
+            <h3 class="font-semibold mb-2">Catering</h3>
+            <p class="text-sm text-gray-600">
+              Delicious food and beverage options
+            </p>
+          </div>
 
-  <!-- AOS Animation Script -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1000, once: true });
-  </script>
-</body>
+          <!-- Service 2 -->
+          <div
+            class="service-card bg-white p-6 rounded-xl shadow-md text-center group cursor-pointer"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <div
+              class="w-16 h-16 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mb-4 mx-auto service-icon transition-transform"
+            >
+              <i data-feather="calendar" class="text-secondary w-8 h-8"></i>
+            </div>
+            <h3 class="font-semibold mb-2">Planning</h3>
+            <p class="text-sm text-gray-600">Professional event coordination</p>
+          </div>
+
+          <!-- Service 3 -->
+          <div
+            class="service-card bg-white p-6 rounded-xl shadow-md text-center group cursor-pointer"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div
+              class="w-16 h-16 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mb-4 mx-auto service-icon transition-transform"
+            >
+              <i data-feather="feather" class="text-secondary w-8 h-8"></i>
+            </div>
+            <h3 class="font-semibold mb-2">Decorations</h3>
+            <p class="text-sm text-gray-600">Beautiful themes and setups</p>
+          </div>
+
+          <!-- Service 4 -->
+          <div
+            class="service-card bg-white p-6 rounded-xl shadow-md text-center group cursor-pointer"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
+            <div
+              class="w-16 h-16 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mb-4 mx-auto service-icon transition-transform"
+            >
+              <i data-feather="music" class="text-secondary w-8 h-8"></i>
+            </div>
+            <h3 class="font-semibold mb-2">Sound System</h3>
+            <p class="text-sm text-gray-600">Quality audio equipment</p>
+          </div>
+
+          <!-- Service 5 -->
+          <div
+            class="service-card bg-white p-6 rounded-xl shadow-md text-center group cursor-pointer"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div
+              class="w-16 h-16 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mb-4 mx-auto service-icon transition-transform"
+            >
+              <i data-feather="camera" class="text-secondary w-8 h-8"></i>
+            </div>
+            <h3 class="font-semibold mb-2">Photography</h3>
+            <p class="text-sm text-gray-600">Capture your special moments</p>
+          </div>
+
+          <!-- Service 6 -->
+          <div
+            class="service-card bg-white p-6 rounded-xl shadow-md text-center group cursor-pointer"
+            data-aos="fade-up"
+            data-aos-delay="350"
+          >
+            <div
+              class="w-16 h-16 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mb-4 mx-auto service-icon transition-transform"
+            >
+              <i data-feather="film" class="text-secondary w-8 h-8"></i>
+            </div>
+            <h3 class="font-semibold mb-2">Entertainment</h3>
+            <p class="text-sm text-gray-600">Performers and activities</p>
+          </div>
+
+          <!-- Service 7 -->
+          <div
+            class="service-card bg-white p-6 rounded-xl shadow-md text-center group cursor-pointer"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            <div
+              class="w-16 h-16 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mb-4 mx-auto service-icon transition-transform"
+            >
+              <i data-feather="truck" class="text-secondary w-8 h-8"></i>
+            </div>
+            <h3 class="font-semibold mb-2">Logistics</h3>
+            <p class="text-sm text-gray-600">Transportation and setup</p>
+          </div>
+
+          <!-- Service 8 -->
+          <div
+            class="service-card bg-white p-6 rounded-xl shadow-md text-center group cursor-pointer"
+            data-aos="fade-up"
+            data-aos-delay="450"
+          >
+            <div
+              class="w-16 h-16 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mb-4 mx-auto service-icon transition-transform"
+            >
+              <i data-feather="gift" class="text-secondary w-8 h-8"></i>
+            </div>
+            <h3 class="font-semibold mb-2">VIP Treatment</h3>
+            <p class="text-sm text-gray-600">Premium services package</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-3xl md:text-4xl font-display font-bold text-center mb-16"
+          data-aos="fade-up"
+        >
+          How It Works
+        </h2>
+
+        <div class="relative">
+          <!-- Timeline -->
+          <div class="grid md:grid-cols-4 gap-8 relative">
+            <!-- Step 1 -->
+            <div
+              class="text-center relative timeline-step"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div
+                class="w-20 h-20 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <span class="text-3xl font-bold text-primary">1</span>
+              </div>
+              <h3 class="text-xl font-semibold mb-4">Choose Venue</h3>
+              <p class="text-gray-600">
+                Browse our curated selection of venues and select the perfect
+                one for your event.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div
+              class="text-center relative timeline-step"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div
+                class="w-20 h-20 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <span class="text-3xl font-bold text-primary">2</span>
+              </div>
+              <h3 class="text-xl font-semibold mb-4">Customize Package</h3>
+              <p class="text-gray-600">
+                Select from our services to create a package that matches your
+                vision and budget.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div
+              class="text-center relative timeline-step"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div
+                class="w-20 h-20 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <span class="text-3xl font-bold text-primary">3</span>
+              </div>
+              <h3 class="text-xl font-semibold mb-4">Reserve & Pay</h3>
+              <p class="text-gray-600">
+                Secure your booking with our easy payment system and
+                confirmation process.
+              </p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+              <div
+                class="w-20 h-20 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <span class="text-3xl font-bold text-primary">4</span>
+              </div>
+              <h3 class="text-xl font-semibold mb-4">Celebrate Your Event</h3>
+              <p class="text-gray-600">
+                Enjoy your special day while we handle all the details behind
+                the scenes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-primary text-white">
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-3xl md:text-4xl font-display font-bold text-center mb-16"
+          data-aos="fade-up"
+        >
+          Benefits of Choosing Us
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div data-aos="fade-right">
+            <div class="flex items-start mb-8">
+              <div
+                class="w-12 h-12 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mr-6 flex-shrink-0"
+              >
+                <i data-feather="dollar-sign" class="text-secondary"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold mb-2">
+                  Cost-Effective Packages
+                </h3>
+                <p class="text-gray-300">
+                  Get more value for your money with our bundled services and
+                  exclusive venue deals.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start mb-8">
+              <div
+                class="w-12 h-12 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mr-6 flex-shrink-0"
+              >
+                <i data-feather="clock" class="text-secondary"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold mb-2">Time-Saving Process</h3>
+                <p class="text-gray-300">
+                  Plan your entire event in one place without the hassle of
+                  coordinating multiple vendors.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div
+                class="w-12 h-12 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mr-6 flex-shrink-0"
+              >
+                <i data-feather="heart" class="text-secondary"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold mb-2">
+                  Stress-Free Experience
+                </h3>
+                <p class="text-gray-300">
+                  Our dedicated event managers handle all details so you can
+                  focus on enjoying your event.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div data-aos="fade-left" data-aos-delay="200" class="relative">
+            <div class="floating">
+              <img
+                src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                alt="Elegant event setup"
+                class="rounded-xl shadow-xl"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-light">
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-3xl md:text-4xl font-display font-bold text-center mb-4"
+          data-aos="fade-up"
+        >
+          What Our Clients Say
+        </h2>
+        <p
+          class="text-xl text-center text-gray-600 mb-16 max-w-3xl mx-auto"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          Don't just take our word for it - hear from some of our satisfied
+          clients.
+        </p>
+
+        <div class="max-w-4xl mx-auto relative">
+          <div class="testimonial-slider overflow-hidden">
+            <div
+              class="testimonial-slides flex transition-transform duration-500"
+            >
+              <!-- Testimonial 1 -->
+              <div class="testimonial-slide w-full flex-shrink-0 px-4">
+                <div
+                  class="bg-white p-8 rounded-xl shadow-md"
+                  data-aos="fade-up"
+                >
+                  <div class="flex items-center mb-6">
+                    <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                      <img
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+                        alt="Client"
+                        class="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h3 class="font-semibold">Michael Rodriguez</h3>
+                      <p class="text-secondary">Wedding Client</p>
+                    </div>
+                  </div>
+                  <p class="text-gray-600 italic">
+                    "EventEase made our wedding planning so effortless. From
+                    venue selection to coordinating all the services, they
+                    handled everything professionally. Our special day was
+                    perfect thanks to their team!"
+                  </p>
+                  <div class="flex mt-4">
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 2 -->
+              <div class="testimonial-slide w-full flex-shrink-0 px-4">
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                  <div class="flex items-center mb-6">
+                    <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                      <img
+                        src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+                        alt="Client"
+                        class="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h3 class="font-semibold">Sarah Johnson</h3>
+                      <p class="text-secondary">Corporate Event Planner</p>
+                    </div>
+                  </div>
+                  <p class="text-gray-600 italic">
+                    "As a corporate event planner, I've worked with many
+                    vendors, but EventEase stands out. Their platform is
+                    intuitive, their service providers are top-notch, and
+                    they've saved me countless hours of coordination."
+                  </p>
+                  <div class="flex mt-4">
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 3 -->
+              <div class="testimonial-slide w-full flex-shrink-0 px-4">
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                  <div class="flex items-center mb-6">
+                    <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                      <img
+                        src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+                        alt="Client"
+                        class="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h3 class="font-semibold">James Wilson</h3>
+                      <p class="text-secondary">Birthday Party Host</p>
+                    </div>
+                  </div>
+                  <p class="text-gray-600 italic">
+                    "I booked my daughter's sweet 16 through EventEase and was
+                    blown away by the quality of service. The venue was
+                    stunning, the catering was delicious, and the decorations
+                    were exactly what we envisioned."
+                  </p>
+                  <div class="flex mt-4">
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                    <i
+                      data-feather="star"
+                      class="text-secondary w-5 h-5 fill-current"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-center mt-8">
+            <button
+              class="testimonial-prev p-2 rounded-full bg-white shadow-md mx-2"
+            >
+              <i data-feather="chevron-left" class="text-primary"></i>
+            </button>
+            <button
+              class="testimonial-next p-2 rounded-full bg-white shadow-md mx-2"
+            >
+              <i data-feather="chevron-right" class="text-primary"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / Booking Form Section -->
+    <section id="contact" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-3xl md:text-4xl font-display font-bold text-center mb-4"
+          data-aos="fade-up"
+        >
+          Ready to Plan Your Event?
+        </h2>
+        <p
+          class="text-xl text-center text-gray-600 mb-16 max-w-3xl mx-auto"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          Get in touch with us today and let's create something memorable
+          together.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-12">
+          <div data-aos="fade-right">
+            <form class="bg-light p-8 rounded-xl shadow-md">
+              <div class="mb-6">
+                <label for="name" class="block text-gray-700 mb-2"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  class="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-secondary"
+                  required
+                />
+              </div>
+
+              <div class="mb-6">
+                <label for="email" class="block text-gray-700 mb-2"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  class="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-secondary"
+                  required
+                />
+              </div>
+
+              <div class="mb-6">
+                <label for="phone" class="block text-gray-700 mb-2"
+                  >Phone Number</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  class="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-secondary"
+                  required
+                />
+              </div>
+
+              <div class="mb-6">
+                <label for="event-type" class="block text-gray-700 mb-2"
+                  >Event Type</label
+                >
+                <select
+                  id="event-type"
+                  class="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-secondary"
+                  required
+                >
+                  <option value="">Select Event Type</option>
+                  <option value="wedding">Wedding</option>
+                  <option value="corporate">Corporate Event</option>
+                  <option value="birthday">Birthday Party</option>
+                  <option value="conference">Conference</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="mb-6">
+                <label for="event-date" class="block text-gray-700 mb-2"
+                  >Event Date</label
+                >
+                <input
+                  type="date"
+                  id="event-date"
+                  class="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-secondary"
+                  required
+                />
+              </div>
+
+              <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Services Needed</label>
+                <div class="grid grid-cols-2 gap-3">
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="checkbox rounded border-gray-300 text-secondary focus:ring-secondary"
+                    />
+                    <span class="ml-2 text-gray-700">Venue</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="checkbox rounded border-gray-300 text-secondary focus:ring-secondary"
+                    />
+                    <span class="ml-2 text-gray-700">Catering</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="checkbox rounded border-gray-300 text-secondary focus:ring-secondary"
+                    />
+                    <span class="ml-2 text-gray-700">Decorations</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="checkbox rounded border-gray-300 text-secondary focus:ring-secondary"
+                    />
+                    <span class="ml-2 text-gray-700">Photography</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="checkbox rounded border-gray-300 text-secondary focus:ring-secondary"
+                    />
+                    <span class="ml-2 text-gray-700">Entertainment</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="checkbox rounded border-gray-300 text-secondary focus:ring-secondary"
+                    />
+                    <span class="ml-2 text-gray-700">Planning</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="mb-6">
+                <label for="message" class="block text-gray-700 mb-2"
+                  >Additional Details</label
+                >
+                <textarea
+                  id="message"
+                  rows="4"
+                  class="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-secondary"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-secondary text-primary font-bold py-4 px-6 rounded-md hover:bg-opacity-90 transition-colors"
+              >
+                Submit Booking Request
+              </button>
+            </form>
+          </div>
+
+          <div data-aos="fade-left" data-aos-delay="200">
+            <div class="bg-primary text-white p-8 rounded-xl shadow-md h-full">
+              <h3 class="text-2xl font-display font-bold mb-6">Our Location</h3>
+              <p class="mb-6">
+                Visit us at our main office in the heart of Dumaguete City:
+              </p>
+              <p class="mb-8 flex items-center">
+                <i data-feather="map-pin" class="mr-3 text-secondary"></i>
+                <span
+                  >123 Eventful Street, Dumaguete City, Negros Oriental,
+                  Philippines</span
+                >
+              </p>
+
+              <div class="mb-8">
+                <h4 class="text-xl font-semibold mb-4">Contact Information</h4>
+                <p class="mb-3 flex items-center">
+                  <i data-feather="phone" class="mr-3 text-secondary"></i>
+                  <span>(035) 123-4567</span>
+                </p>
+                <p class="mb-3 flex items-center">
+                  <i data-feather="mail" class="mr-3 text-secondary"></i>
+                  <span>info@eventease-dgte.com</span>
+                </p>
+                <p class="flex items-center">
+                  <i data-feather="clock" class="mr-3 text-secondary"></i>
+                  <span>Monday - Saturday: 9AM - 6PM</span>
+                </p>
+              </div>
+
+              <div class="rounded-xl overflow-hidden h-64">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3930.258033328895!2d123.3065114750496!3d9.907015088189835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a6ac13cdc1763f%3A0x5f9a75b927b3bfea!2sDumaguete%20City%2C%20Negros%20Oriental!5e0!3m2!1sen!2sph!4v1689833789222!5m2!1sen!2sph"
+                  width="100%"
+                  height="100%"
+                  style="border: 0"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-4 gap-8 mb-8">
+          <div>
+            <a href="#" class="text-2xl font-bold flex items-center mb-6">
+              <span class="text-secondary">Event</span>Ease
+            </a>
+            <p class="text-gray-300 mb-6">
+              Your one-stop solution for seamless event planning and venue
+              booking in Dumaguete City.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="text-gray-300 hover:text-secondary transition-colors"
+              >
+                <i data-feather="facebook"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-secondary transition-colors"
+              >
+                <i data-feather="instagram"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-secondary transition-colors"
+              >
+                <i data-feather="twitter"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-secondary transition-colors"
+              >
+                <i data-feather="linkedin"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#features"
+                  class="text-gray-300 hover:text-secondary transition-colors"
+                  >Features</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="text-gray-300 hover:text-secondary transition-colors"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#how-it-works"
+                  class="text-gray-300 hover:text-secondary transition-colors"
+                  >How It Works</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#testimonials"
+                  class="text-gray-300 hover:text-secondary transition-colors"
+                  >Testimonials</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="text-gray-300 hover:text-secondary transition-colors"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Our Services</h3>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-secondary transition-colors"
+                  >Venue Booking</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-secondary transition-colors"
+                  >Catering</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-secondary transition-colors"
+                  >Event Planning</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-secondary transition-colors"
+                  >Decorations</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-secondary transition-colors"
+                  >Entertainment</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Contact Info</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i data-feather="map-pin" class="mr-3 text-secondary mt-1"></i>
+                <span class="text-gray-300"
+                  >123 Eventful Street, Dumaguete City, Philippines</span
+                >
+              </li>
+              <li class="flex items-center">
+                <i data-feather="phone" class="mr-3 text-secondary"></i>
+                <span class="text-gray-300">(035) 123-4567</span>
+              </li>
+              <li class="flex items-center">
+                <i data-feather="mail" class="mr-3 text-secondary"></i>
+                <span class="text-gray-300">info@eventease-dgte.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+          <p>&copy; 2023 EventEase Dumaguete. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+      });
+
+      // Initialize Feather Icons
+      feather.replace();
+
+      // Particle animation for hero section
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("particles-container");
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement("div");
+          particle.classList.add("particle");
+
+          const size = Math.random() * 10 + 5;
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+
+          particle.style.left = `${Math.random() * 100}%`;
+          particle.style.top = `${Math.random() * 100}%`;
+
+          container.appendChild(particle);
+
+          anime({
+            targets: particle,
+            translateX: () => anime.random(-100, 100),
+            translateY: () => anime.random(-100, 100),
+            duration: () => anime.random(5000, 15000),
+            easing: "easeInOutQuad",
+            loop: true,
+            direction: "alternate",
+          });
+        }
+
+        // Counter animation
+        const counters = document.querySelectorAll(".counter");
+        counters.forEach((counter) => {
+          const target = parseInt(counter.getAttribute("data-count"));
+          let count = 0;
+          const duration = 2000;
+          const increment = target / (duration / 16);
+
+          const updateCount = () => {
+            if (count < target) {
+              count += increment;
+              counter.innerText = Math.ceil(count);
+              setTimeout(updateCount, 16);
+            } else {
+              counter.innerText = target;
+            }
+          };
+
+          // Start counter when in viewport
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  updateCount();
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.5 }
+          );
+
+          observer.observe(counter);
+        });
+
+        // Testimonial slider
+        const testimonialSlider = document.querySelector(".testimonial-slides");
+        const testimonialSlides =
+          document.querySelectorAll(".testimonial-slide");
+        const prevButton = document.querySelector(".testimonial-prev");
+        const nextButton = document.querySelector(".testimonial-next");
+        let currentSlide = 0;
+
+        function showSlide(index) {
+          testimonialSlider.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        prevButton.addEventListener("click", () => {
+          currentSlide =
+            currentSlide > 0 ? currentSlide - 1 : testimonialSlides.length - 1;
+          showSlide(currentSlide);
+        });
+
+        nextButton.addEventListener("click", () => {
+          currentSlide =
+            currentSlide < testimonialSlides.length - 1 ? currentSlide + 1 : 0;
+          showSlide(currentSlide);
+        });
+
+        // Auto slide testimonials
+        setInterval(() => {
+          currentSlide =
+            currentSlide < testimonialSlides.length - 1 ? currentSlide + 1 : 0;
+          showSlide(currentSlide);
+        }, 5000);
+
+        // Navbar scroll effect
+        const navbar = document.querySelector("nav");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 50) {
+            navbar.classList.add("py-2", "bg-opacity-90", "backdrop-blur-sm");
+          } else {
+            navbar.classList.remove(
+              "py-2",
+              "bg-opacity-90",
+              "backdrop-blur-sm"
+            );
+          }
+        });
+
+        // Form validation
+        const form = document.querySelector("form");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          // Simple validation
+          let isValid = true;
+          const inputs = form.querySelectorAll(
+            "input[required], select[required]"
+          );
+
+          inputs.forEach((input) => {
+            if (!input.value) {
+              input.classList.add("border-red-500");
+              isValid = false;
+            } else {
+              input.classList.remove("border-red-500");
+            }
+          });
+
+          if (isValid) {
+            // Form is valid, you would typically send data to a server here
+            alert(
+              "Thank you for your booking request! We will contact you shortly."
+            );
+            form.reset();
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
