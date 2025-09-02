@@ -1,166 +1,146 @@
-// ========================
-// PoleWatch App JS
-// ========================
+      // Initialize AOS
+      AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+      });
 
-document.addEventListener("DOMContentLoaded", initApp);
+      // Initialize Feather Icons
+      feather.replace();
 
-// Screen DOM elements
-const homeScreen = document.getElementById("homeScreen");
-const reportsScreen = document.getElementById("reportsScreen");
-const reportDetailsScreen = document.getElementById("reportDetailsScreen");
-const infoScreen = document.getElementById("infoScreen");
-const accountScreen = document.getElementById("accountScreen");
+      // Particle animation for hero section
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("particles-container");
+        const particleCount = 50;
 
-// Nav buttons
-const homeNav = document.getElementById("homeNav");
-const reportsNav = document.getElementById("reportsNav");
-const infoNav = document.getElementById("infoNav");
-const accountNav = document.getElementById("accountNav");
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement("div");
+          particle.classList.add("particle");
 
-// Other DOM elements
-const newReportBtn = document.getElementById("newReportBtn");
-const backToReportsBtn = document.getElementById("backToReportsBtn");
-const reportForm = document.getElementById("reportForm");
-const captureBtn = document.getElementById("captureBtn");
-const photoUpload = document.getElementById("photoUpload");
-const previewImage = document.getElementById("previewImage");
+          const size = Math.random() * 10 + 5;
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
 
-// Account states
-const guestAccount = document.getElementById("guestAccount");
-const userAccount = document.getElementById("userAccount");
+          particle.style.left = `${Math.random() * 100}%`;
+          particle.style.top = `${Math.random() * 100}%`;
 
-// ========================
-// INIT
-// ========================
-function initApp() {
-  // Navigation
-  homeNav.addEventListener("click", showHomeScreen);
-  reportsNav.addEventListener("click", showReportsScreen);
-  infoNav.addEventListener("click", showInfoScreen);
-  accountNav.addEventListener("click", showAccountScreen);
+          container.appendChild(particle);
 
-  // Other actions
-  if (newReportBtn) newReportBtn.addEventListener("click", showHomeScreen);
-  if (backToReportsBtn) backToReportsBtn.addEventListener("click", showReportsScreen);
-  if (reportForm) reportForm.addEventListener("submit", handleReportSubmit);
-  if (captureBtn) captureBtn.addEventListener("click", () => photoUpload.click());
-  if (photoUpload) photoUpload.addEventListener("change", handlePhotoUpload);
+          anime({
+            targets: particle,
+            translateX: () => anime.random(-100, 100),
+            translateY: () => anime.random(-100, 100),
+            duration: () => anime.random(5000, 15000),
+            easing: "easeInOutQuad",
+            loop: true,
+            direction: "alternate",
+          });
+        }
 
-  // Account login/logout toggle
-  setupAccountButtons();
+        // Counter animation
+        const counters = document.querySelectorAll(".counter");
+        counters.forEach((counter) => {
+          const target = parseInt(counter.getAttribute("data-count"));
+          let count = 0;
+          const duration = 2000;
+          const increment = target / (duration / 16);
 
-  // Try to get location
-  getLocation();
+          const updateCount = () => {
+            if (count < target) {
+              count += increment;
+              counter.innerText = Math.ceil(count);
+              setTimeout(updateCount, 16);
+            } else {
+              counter.innerText = target;
+            }
+          };
 
-  // Start on Home
-  showHomeScreen();
-}
+          // Start counter when in viewport
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  updateCount();
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.5 }
+          );
 
-// ========================
-// SCREEN HANDLING
-// ========================
-function resetScreens() {
-  homeScreen.classList.add("hidden");
-  reportsScreen.classList.add("hidden");
-  reportDetailsScreen.classList.add("hidden");
-  infoScreen.classList.add("hidden");
-  accountScreen.classList.add("hidden");
+          observer.observe(counter);
+        });
 
-  // Reset nav colors
-  [homeNav, reportsNav, infoNav, accountNav].forEach((nav) => {
-    nav.querySelector("i").classList.add("text-gray-500");
-    nav.querySelector("i").classList.remove("text-blue-600");
-    nav.querySelector("span").classList.add("text-gray-500");
-    nav.querySelector("span").classList.remove("text-blue-600");
-  });
-}
+        // Testimonial slider
+        const testimonialSlider = document.querySelector(".testimonial-slides");
+        const testimonialSlides =
+          document.querySelectorAll(".testimonial-slide");
+        const prevButton = document.querySelector(".testimonial-prev");
+        const nextButton = document.querySelector(".testimonial-next");
+        let currentSlide = 0;
 
-function showHomeScreen() {
-  resetScreens();
-  homeScreen.classList.remove("hidden");
-  setActiveNav(homeNav);
-}
+        function showSlide(index) {
+          testimonialSlider.style.transform = `translateX(-${index * 100}%)`;
+        }
 
-function showReportsScreen() {
-  resetScreens();
-  reportsScreen.classList.remove("hidden");
-  setActiveNav(reportsNav);
-}
+        prevButton.addEventListener("click", () => {
+          currentSlide =
+            currentSlide > 0 ? currentSlide - 1 : testimonialSlides.length - 1;
+          showSlide(currentSlide);
+        });
 
-function showInfoScreen() {
-  resetScreens();
-  infoScreen.classList.remove("hidden");
-  setActiveNav(infoNav);
-}
+        nextButton.addEventListener("click", () => {
+          currentSlide =
+            currentSlide < testimonialSlides.length - 1 ? currentSlide + 1 : 0;
+          showSlide(currentSlide);
+        });
 
-function showAccountScreen() {
-  resetScreens();
-  accountScreen.classList.remove("hidden");
-  setActiveNav(accountNav);
-}
+        // Auto slide testimonials
+        setInterval(() => {
+          currentSlide =
+            currentSlide < testimonialSlides.length - 1 ? currentSlide + 1 : 0;
+          showSlide(currentSlide);
+        }, 5000);
 
-function setActiveNav(nav) {
-  nav.querySelector("i").classList.replace("text-gray-500", "text-blue-600");
-  nav.querySelector("span").classList.replace("text-gray-500", "text-blue-600");
-}
+        // Navbar scroll effect
+        const navbar = document.querySelector("nav");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 50) {
+            navbar.classList.add("py-2", "bg-opacity-90", "backdrop-blur-sm");
+          } else {
+            navbar.classList.remove(
+              "py-2",
+              "bg-opacity-90",
+              "backdrop-blur-sm"
+            );
+          }
+        });
 
-// ========================
-// REPORT HANDLING
-// ========================
-function handleReportSubmit(e) {
-  e.preventDefault();
-  alert("Report submitted successfully!");
-  showReportsScreen();
-}
+        // Form validation
+        const form = document.querySelector("form");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          // Simple validation
+          let isValid = true;
+          const inputs = form.querySelectorAll(
+            "input[required], select[required]"
+          );
 
-function handlePhotoUpload(event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      previewImage.src = e.target.result;
-      previewImage.classList.remove("hidden");
-    };
-    reader.readAsDataURL(file);
-  }
-}
+          inputs.forEach((input) => {
+            if (!input.value) {
+              input.classList.add("border-red-500");
+              isValid = false;
+            } else {
+              input.classList.remove("border-red-500");
+            }
+          });
 
-// ========================
-// LOCATION HANDLING
-// ========================
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        console.log("Latitude:", position.coords.latitude);
-        console.log("Longitude:", position.coords.longitude);
-      },
-      (error) => {
-        console.warn("Location error:", error.message);
-      }
-    );
-  }
-}
-
-// ========================
-// ACCOUNT HANDLING
-// ========================
-function setupAccountButtons() {
-  // Guest → Sign In
-  const signInBtn = guestAccount?.querySelector("button");
-  if (signInBtn) {
-    signInBtn.addEventListener("click", () => {
-      guestAccount.classList.add("hidden");
-      userAccount.classList.remove("hidden");
-    });
-  }
-
-  // User → Sign Out
-  const signOutBtn = userAccount?.querySelector("button");
-  if (signOutBtn) {
-    signOutBtn.addEventListener("click", () => {
-      userAccount.classList.add("hidden");
-      guestAccount.classList.remove("hidden");
-    });
-  }
-}
+          if (isValid) {
+            // Form is valid, you would typically send data to a server here
+            alert(
+              "Thank you for your booking request! We will contact you shortly."
+            );
+            form.reset();
+          }
+        });
+      });
