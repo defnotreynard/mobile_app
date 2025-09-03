@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book Now — Component</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .pulse {
+        animation: pulse 2s infinite;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        transition: transform 0.15s ease;
+      }
+      .pulse:active {
+        transform: translateY(1px);
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.03);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .fab {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 1080;
+        border-radius: 999px;
+        width: 64px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal.fade .modal-dialog {
+        transform: translateY(12px);
+        transition: transform 0.28s ease-out;
+      }
+      .modal.fade.show .modal-dialog {
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-4 d-none d-md-block">
+      <div class="row">
+        <div class="col-md-8">
+          <h3>Ready to plan your event?</h3>
+          <p class="text-muted">
+            Book our event planning services in Dumaguete City — packages for
+            weddings, birthdays, corporate events and more.
+          </p>
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-end">
+          <button id="openBooking" class="btn btn-primary btn-lg pulse">
+            Book Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button
+      id="openBookingFab"
+      class="btn btn-primary fab d-md-none pulse"
+      aria-label="Book now"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="28"
+        height="28"
+        fill="currentColor"
+        class="bi bi-calendar-plus"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M4 .5a.5.5 0 0 1 .5.5V2h6V1a.5.5 0 0 1 1 0v1h.5A1.5 1.5 0 0 1 13 3.5v9A1.5 1.5 0 0 1 11.5 14H4.5A1.5 1.5 0 0 1 3 12.5v-9A1.5 1.5 0 0 1 4.5 2H5V1a.5.5 0 0 1 .5-.5zM4.118 4L4 4.01V5h8V4.01L11.882 4H4.118z"
+        />
+        <path
+          d="M8 7.5a.5.5 0 0 1 .5.5V9h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1V8a.5.5 0 0 1 .5-.5z"
+        />
+      </svg>
+    </button>
+
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Book an Event</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <form id="bookingForm" class="needs-validation" novalidate>
+            <div class="modal-body">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="fullName" class="form-label">Full name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fullName"
+                    name="fullName"
+                    required
+                  />
+                  <div class="invalid-feedback">Please provide your name.</div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Please enter a valid email.
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">Phone Number</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="phone"
+                    name="phone"
+                    placeholder="e.g. 0917-123-4567"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Please provide your phone number.
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="address" class="form-label">Address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="address"
+                    name="address"
+                    placeholder="Street, Barangay, City"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Please provide your address.
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="eventType" class="form-label">Event type</label>
+                  <select id="eventType" class="form-select" required>
+                    <option value="">Choose...</option>
+                    <option>Wedding</option>
+                    <option>Birthday</option>
+                    <option>Corporate</option>
+                    <option>Debut</option>
+                    <option>Anniversary</option>
+                    <option>Other</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please choose an event type.
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <label for="date" class="form-label">Date</label>
+                  <input type="date" class="form-control" id="date" required />
+                  <div class="invalid-feedback">Please pick a date.</div>
+                </div>
+
+                <div class="col-md-3">
+                  <label for="time" class="form-label">Time</label>
+                  <input type="time" class="form-control" id="time" required />
+                  <div class="invalid-feedback">Please pick a time.</div>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="guests" class="form-label"
+                    >Estimated guests</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="guests"
+                    min="1"
+                    placeholder="e.g. 80"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Please enter the number of guests.
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="budget" class="form-label">Budget Range</label>
+                  <select id="budget" class="form-select" required>
+                    <option value="">Select...</option>
+                    <option>₱20,000 - ₱50,000</option>
+                    <option>₱50,000 - ₱100,000</option>
+                    <option>₱100,000 - ₱200,000</option>
+                    <option>₱200,000+</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please choose your budget range.
+                  </div>
+                </div>
+
+                <div class="col-md-8">
+                  <label for="package" class="form-label">Package</label>
+                  <select id="package" class="form-select">
+                    <option>Basic: Coordination & Venue Support</option>
+                    <option>Standard: Coordination + Catering</option>
+                    <option>
+                      Premium: Full-service (decoration, AV, catering)
+                    </option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="theme" class="form-label">Event Theme</label>
+                  <input
+                    type="text"
+                    id="theme"
+                    class="form-control"
+                    placeholder="e.g. Rustic, Modern, Tropical"
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="services" class="form-label"
+                    >Additional Services</label
+                  >
+                  <select id="services" class="form-select" multiple>
+                    <option>Photography</option>
+                    <option>Videography</option>
+                    <option>Live Band / DJ</option>
+                    <option>Transportation</option>
+                    <option>Accommodation</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label for="notes" class="form-label"
+                    >Notes / Special requests</label
+                  >
+                  <textarea id="notes" class="form-control" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button id="submitBtn" type="submit" class="btn btn-primary">
+                Confirm Booking
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+      <div
+        id="bookingToast"
+        class="toast align-items-center text-bg-success border-0"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            Booking request sent — we'll contact you soon.
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const bookingModalEl = document.getElementById("bookingModal");
+      const bookingModal = new bootstrap.Modal(bookingModalEl, {});
+      document
+        .getElementById("openBooking")
+        .addEventListener("click", () => bookingModal.show());
+      document
+        .getElementById("openBookingFab")
+        .addEventListener("click", () => bookingModal.show());
+
+      (function () {
+        "use strict";
+        const form = document.getElementById("bookingForm");
+        form.addEventListener(
+          "submit",
+          function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+              form.classList.add("was-validated");
+              return;
+            }
+
+            event.preventDefault();
+
+            const data = {
+              name: document.getElementById("fullName").value,
+              email: document.getElementById("email").value,
+              phone: document.getElementById("phone").value,
+              address: document.getElementById("address").value,
+              eventType: document.getElementById("eventType").value,
+              date: document.getElementById("date").value,
+              time: document.getElementById("time").value,
+              guests: document.getElementById("guests").value,
+              budget: document.getElementById("budget").value,
+              package: document.getElementById("package").value,
+              theme: document.getElementById("theme").value,
+              services: Array.from(
+                document.getElementById("services").selectedOptions
+              ).map((o) => o.value),
+              notes: document.getElementById("notes").value,
+            };
+
+            const toastEl = document.getElementById("bookingToast");
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+            bookingModal.hide();
+
+            form.reset();
+            form.classList.remove("was-validated");
+
+            console.log("Booking data (demo):", data);
+          },
+          false
+        );
+      })();
+    </script>
+  </body>
+</html>
