@@ -38,41 +38,74 @@
   </head>
   <body class="font-sans text-primary bg-light">
     <!-- Navigation -->
+    <!-- Navigation -->
     <nav
-      class="fixed w-full bg-primary text-white z-50 transition-all duration-300 shadow-md"
+      class="fixed w-full text-white z-50 transition-all duration-300 shadow-md"
+      style="background-color: #80dfd3"
     >
       <div class="container mx-auto px-4 py-4">
         <div class="flex justify-between items-center">
           <a href="#" class="text-2xl font-bold flex items-center">
-            <span class="text-secondary">Event</span>Ease
+            <span style="color: #00bfa6">Event</span>Ease
           </a>
           <div class="hidden md:flex space-x-8">
-            <a href="#features" class="hover:text-secondary transition-colors"
+            <a
+              href="#features"
+              class="transition-colors"
+              style="color: white"
+              onmouseover="this.style.color='#006053';"
+              onmouseout="this.style.color='white';"
               >Features</a
             >
-            <a href="#services" class="hover:text-secondary transition-colors"
+
+            <a
+              href="#services"
+              class="transition-colors"
+              style="color: white"
+              onmouseover="this.style.color='#006053';"
+              onmouseout="this.style.color='white';"
               >Services</a
             >
+
             <a
               href="#how-it-works"
-              class="hover:text-secondary transition-colors"
+              class="transition-colors"
+              style="color: white"
+              onmouseover="this.style.color='#006053';"
+              onmouseout="this.style.color='white';"
               >How It Works</a
             >
+
             <a
               href="#testimonials"
-              class="hover:text-secondary transition-colors"
+              class="transition-colors"
+              style="color: white"
+              onmouseover="this.style.color='#006053';"
+              onmouseout="this.style.color='white';"
               >Testimonials</a
             >
-            <a href="#contact" class="hover:text-secondary transition-colors"
+
+            <a
+              href="#contact"
+              class="transition-colors"
+              style="color: white"
+              onmouseover="this.style.color='#006053';"
+              onmouseout="this.style.color='white';"
               >Contact</a
             >
           </div>
           <div class="flex items-center space-x-4">
+            <!-- Login button with hover -->
             <button
-              class="hidden md:block px-4 py-2 rounded-md bg-secondary text-primary font-semibold hover:bg-opacity-90 transition-colors"
+              class="hidden md:block px-4 py-2 rounded-md font-semibold text-white transition-colors"
+              style="background-color: #00bfa6"
+              onmouseover="this.style.backgroundColor='#006053';"
+              onmouseout="this.style.backgroundColor='#00bfa6';"
             >
               Login
             </button>
+
+            <!-- Mobile menu button -->
             <button class="md:hidden">
               <i data-feather="menu" class="text-white"></i>
             </button>
@@ -81,11 +114,33 @@
       </div>
     </nav>
 
-    <!-- Hero Section -->
     <section
-      class="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary to-accent"
+      class="relative h-screen flex items-center justify-center overflow-hidden"
+      style="background-color: #80dfd3"
     >
+      <!-- Video Background -->
+      <video
+        id="bg-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        class="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/assets/video/wedding.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <!-- Overlay with proper rgba() -->
+      <div
+        class="absolute inset-0"
+        style="background-color: #ffffff(128, 223, 211, 0.7)"
+      ></div>
+
+      <!-- Particles (optional) -->
       <div id="particles-container" class="absolute inset-0"></div>
+
+      <!-- Content -->
       <div
         class="container mx-auto px-4 z-10 text-center text-white"
         data-aos="fade-up"
@@ -99,7 +154,10 @@
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
           <button
-            class="px-8 py-4 bg-secondary text-primary font-bold rounded-md hover:bg-opacity-90 transition-all transform hover:-translate-y-1 shadow-lg"
+            class="px-8 py-4 text-primary font-bold rounded-md transition-all transform hover:-translate-y-1 shadow-lg"
+            style="background-color: #00bfa6"
+            onmouseover="this.style.backgroundColor='#006053';"
+            onmouseout="this.style.backgroundColor='#00bfa6';"
           >
             Book Now
           </button>
@@ -109,11 +167,6 @@
             Explore Packages
           </button>
         </div>
-      </div>
-      <div
-        class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
-      >
-        <i data-feather="arrow-down" class="text-white"></i>
       </div>
     </section>
 
@@ -1088,7 +1141,7 @@
         </div>
       </div>
     </footer>
-
+    <script src="/assets/javascript/video.js/videostart.js"></script>
     <script src="assets/javascript/app.js"></script>
   </body>
 </html>
