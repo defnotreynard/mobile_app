@@ -95,7 +95,7 @@
             >
           </div>
           <div class="flex items-center space-x-4">
-            <!-- ✅ Login button with hover -->
+            <!-- Login button with hover -->
             <button
               class="hidden md:block px-4 py-2 rounded-md font-semibold text-white transition-colors"
               style="background-color: #00bfa6"
@@ -116,9 +116,11 @@
 
     <section
       class="relative h-screen flex items-center justify-center overflow-hidden"
+      style="background-color: #80dfd3"
     >
       <!-- Video Background -->
       <video
+        id="bg-video"
         autoplay
         muted
         loop
@@ -129,12 +131,13 @@
         Your browser does not support the video tag.
       </video>
 
-      <!-- Overlay for better contrast -->
+      <!-- Overlay with proper rgba() -->
       <div
-        class="absolute inset-0 bg-gradient-to-br from-primary/70 to-accent/70"
+        class="absolute inset-0"
+        style="background-color: #ffffff(128, 223, 211, 0.7)"
       ></div>
 
-      <!-- Particles (if you want to keep them) -->
+      <!-- Particles (optional) -->
       <div id="particles-container" class="absolute inset-0"></div>
 
       <!-- Content -->
@@ -151,7 +154,10 @@
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
           <button
-            class="px-8 py-4 bg-secondary text-primary font-bold rounded-md hover:bg-opacity-90 transition-all transform hover:-translate-y-1 shadow-lg"
+            class="px-8 py-4 text-primary font-bold rounded-md transition-all transform hover:-translate-y-1 shadow-lg"
+            style="background-color: #00bfa6"
+            onmouseover="this.style.backgroundColor='#006053';"
+            onmouseout="this.style.backgroundColor='#00bfa6';"
           >
             Book Now
           </button>
@@ -162,14 +168,8 @@
           </button>
         </div>
       </div>
-
-      <!-- Scroll Down Icon -->
-      <div
-        class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10"
-      >
-        <i data-feather="arrow-down" class="text-white"></i>
-      </div>
     </section>
+
     <!-- Features Section -->
     <section id="features" class="py-20 bg-white">
       <div class="container mx-auto px-4">
@@ -1141,7 +1141,7 @@
         </div>
       </div>
     </footer>
-
+    <script src="/assets/javascript/video.js/videostart.js"></script>
     <script src="assets/javascript/app.js"></script>
   </body>
 </html>
